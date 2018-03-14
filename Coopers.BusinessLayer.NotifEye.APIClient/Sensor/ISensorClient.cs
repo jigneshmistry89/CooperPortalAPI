@@ -75,5 +75,36 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="SensorID">Unique identifier of the sensor</param>
         /// <returns>true/false</returns>
         Task<string> RemoveSensor(long SensorID);
+
+        /// <summary>
+        /// Sets the display name of the sensor
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <param name="SensorName">Name to give the sensor</param>
+        /// <returns></returns>
+        Task<string> SensorSetName(long SensorID, string SensorName);
+
+        /// <summary>
+        /// Sets the heartbeat intervals of the sensor
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <param name="ReportInterval">Standard state heart beat</param>
+        /// <param name="ActiveStateInterval">Aware state heart beat</param>
+        /// <returns></returns>
+        Task<string> SensorSetHeartbeat(long SensorID, double ReportInterval, double ActiveStateInterval);
+
+        /// <summary>
+        /// Creates/Updates sensor attribute.
+        /// </summary>
+        /// <param name="SensorAttribute">Sensor attribute model</param>
+        /// <returns>Created/Updated Sensor attribute model</returns>
+        Task<Model.DTO.SensorAttribute> SensorAttributeSet(Model.DTO.SensorAttribute SensorAttribute);
+
+        /// <summary>
+        /// Returns the list of attributes that belong to a sensor.
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <returns>List of sensor Attributes</returns>
+        Task<List<Model.DTO.SensorAttribute>> SensorAttributes(long SensorID);
     }
 }

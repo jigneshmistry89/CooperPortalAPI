@@ -1,4 +1,5 @@
 ﻿using Coopers.BusinessLayer.Model.DTO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Coopers.BusinessLayer.Services.Services
@@ -21,15 +22,30 @@ namespace Coopers.BusinessLayer.Services.Services
         /// </summary>
         /// <param name="GatewayID">Identifier of gateway to move</param>
         /// <param name="NetworkID">Identifier of network on your account</param>
-        /// <returns>true/false</returns>
-        Task<bool> AssignGateway(long GatewayID, long NetworkID);
+        /// <returns>Success/Failure</returns>
+        Task<string> AssignGateway(long GatewayID, long NetworkID);
+
+
+        /// <summary>
+        /// Assigns gateways to the specified network
+        /// </summary>
+        /// <param name="GatewayBulkAssign">GatewayBulkAssign model</param>
+        /// <returns>list of GatewayBulkResponse</returns>
+        Task<List<GatewayBulkResponse>> BulkAssignGateway(GatewayBulkAssign GatewayBulkAssign);
 
         /// <summary>
         /// Removes the gateway object from the network.
         /// </summary>
         /// <param name="SensorID">Unique identifier of the gateway</param>
         /// <returns>true/false</returns>
-        Task<bool> RemoveGateway(long GatewayID);
+        Task<string> RemoveGateway(long GatewayID);
+
+        /// <summary>
+        /// Removes the gateway object from the network.
+        /// </summary>
+        /// <param name="GatewayID">List of the gateway ids</param>
+        /// <returns>list of GatewayBulkResponse mdoel</returns>
+        Task<List<GatewayBulkResponse>> BulkRemoveGateway(List<long> GatewayIDs);
 
         /// <summary>
         /// Create a gateway
@@ -37,6 +53,13 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <param name="Gateway">Gateway model</param>
         /// <returns>if created 1 else 0  </returns>
         Task<int> CreateGateway(Gateway Gateway);
+
+        /// <summary>
+        /// Update the Gateway
+        /// </summary>
+        /// <param name="UpdateGateway">Gateway Model</param>
+        /// <returns>No of records updated</returns>
+        Task<int> UpdateGateway(UpdateGateway UpdateGateway);
 
     }
 }

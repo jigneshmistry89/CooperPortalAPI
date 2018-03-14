@@ -157,6 +157,69 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             return res;
         }
 
+        /// <summary>
+        /// Sets the display name of the sensor
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <param name="SensorName">Name to give the sensor</param>
+        /// <returns></returns>
+        public async Task<string> SensorSetName(long SensorID,string SensorName)
+        {
+            var res = await _httpService.GetAsAsync<string>("SensorSetName", string.Format("SensorID={0}&SensorName={1}", SensorID, SensorName), false, false);
+
+            if (res != "Success")
+            {
+                throw new System.Exception(res);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Sets the heartbeat intervals of the sensor
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <param name="ReportInterval">Standard state heart beat</param>
+        /// <param name="ActiveStateInterval">Aware state heart beat</param>
+        /// <returns></returns>
+        public async Task<string> SensorSetHeartbeat(long SensorID, double ReportInterval,double ActiveStateInterval)
+        {
+            var queryParam = string.Format("SensorID={0}&ReportInterval={1}&ActiveStateInterval={2}", SensorID, ReportInterval, ActiveStateInterval);
+
+            var res = await _httpService.GetAsAsync<string>("SensorSetHeartbeat", queryParam, false, false);
+
+            if (res != "Success")
+            {
+                throw new System.Exception(res);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Creates/Updates sensor attribute.
+        /// </summary>
+        /// <param name="SensorAttribute">Sensor attribute model</param>
+        /// <returns>Created/Updated Sensor attribute model</returns>
+        public async Task<Model.DTO.SensorAttribute> SensorAttributeSet(Model.DTO.SensorAttribute SensorAttribute)
+        {
+            var queryParam = string.Format("SensorID={0}&Name={1}&Value={2}", SensorAttribute.SensorID, SensorAttribute.Name, SensorAttribute.Value);
+
+           return await _httpService.GetAsAsync<Model.DTO.SensorAttribute>("SensorAttributeSet", queryParam, false, false);
+        }
+
+        /// <summary>
+        /// Returns the list of attributes that belong to a sensor.
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <returns>List of sensor Attributes</returns>
+        public async Task<List<Model.DTO.SensorAttribute>> SensorAttributes(long SensorID)
+        {
+            var queryParam = string.Format("SensorID={0}", SensorID);
+
+            return await _httpService.GetAsAsync<List<Model.DTO.SensorAttribute>>("SensorAttributes", queryParam, false, false);
+        }
+
         #endregion
 
 

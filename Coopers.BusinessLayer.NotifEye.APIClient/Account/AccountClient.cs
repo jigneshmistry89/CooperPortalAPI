@@ -125,7 +125,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             }
             catch (Exception ex)
             {
-                if (ex.Message != "No Subscriptions found.")
+                if (!ex.Message.Contains("No Subscriptions found."))
                 {
                     throw ex;
                 }

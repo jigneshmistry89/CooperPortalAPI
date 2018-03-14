@@ -1,4 +1,5 @@
-﻿using Coopers.BusinessLayer.NotifEye.APIClient.DTO;
+﻿using Coopers.BusinessLayer.Model.DTO;
+using Coopers.BusinessLayer.NotifEye.APIClient.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,11 +47,45 @@ namespace Coopers.BusinessLayer.Services.Services
         Task<string> AssignSensor(long SensorID, long NetworkID);
 
         /// <summary>
+        /// Assign the sensors to the given network
+        /// </summary>
+        /// <param name="SensorBulkAssing">Sensor bulk Assing model</param>
+        /// <returns>Success/Failure</returns>
+        Task<List<SensorBulkResponse>> BulkAssignSensor(Model.DTO.SensorBulkAssign SensorBulkAssing);
+
+        /// <summary>
         /// Removes the sensor object from the network.
         /// </summary>
         /// <param name="SensorID">Unique identifier of the sensor</param>
         /// <returns>true/false</returns>
         Task<string> RemoveSensor(long SensorID);
 
+        /// <summary>
+        /// Remove the sensors to the given network
+        /// </summary>
+        /// <param name="SensorIDs">List of sensorIDs</param>
+        /// <returns>success/failure</returns>
+        Task<List<SensorBulkResponse>> BulkRemoveSensor(List<long> SensorIDs);
+
+        /// <summary>
+        /// Update the SensorName and the Heartbeat info
+        /// </summary>
+        /// <param name="UpdateSensor">Update sensor model</param>
+        /// <returns>Success/Failure</returns>
+        Task<string> UpdateSensor(UpdateSensor UpdateSensor);
+
+        /// <summary>
+        /// Bulk Update sensor details 
+        /// </summary>
+        /// <param name="UpdateSensors">List of BulkUpdate model</param>
+        /// <returns>List of SensorBulkResponse</returns>
+        Task<List<SensorBulkResponse>> BulkUpdateSensor(List<UpdateSensor> UpdateSensors);
+
+        /// <summary>
+        /// Creates/Updates sensor attribute.
+        /// </summary>
+        /// <param name="SensorAttribute">Sensor attribute model</param>
+        /// <returns>Created/Updated Sensor attribute model</returns>
+        Task<SensorAttribute> UpdateSensorAttribute(SensorAttribute SensorAttribute);
     }
 }

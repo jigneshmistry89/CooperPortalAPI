@@ -90,6 +90,46 @@ namespace Coopers.BusinessLayer.API.Controllers
 
 
         /// <summary>
+        /// Update the SensorName and the Heartbeat info
+        /// </summary>
+        /// <param name="UpdateSensor">Update sensor model</param>
+        /// <returns>Success/Failure</returns>
+        [HttpPut]
+        [Route("")]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> UpdateSensor(Model.DTO.UpdateSensor UpdateSensor)
+        {
+            return Ok(await _sensorApplicationService.UpdateSensor(UpdateSensor));
+        }
+
+        /// <summary>
+        /// Bulk Update sensor details 
+        /// </summary>
+        /// <param name="UpdateSensors">List of BulkUpdate model</param>
+        /// <returns>List of SensorBulkResponse</returns>
+        [HttpPut]
+        [Route("BulkUpdate")]
+        [ResponseType(typeof(List<Model.DTO.SensorBulkResponse>))]
+        public async Task<IHttpActionResult> BulkUpdateSensor(List<Model.DTO.UpdateSensor> UpdateSensors)
+        {
+            return Ok(await _sensorApplicationService.BulkUpdateSensor(UpdateSensors));
+        }
+
+        /// <summary>
+        /// Creates/Updates sensor attribute.
+        /// </summary>
+        /// <param name="SensorAttribute">Sensor attribute model</param>
+        /// <returns>Created/Updated Sensor attribute model</returns>
+        [HttpPut]
+        [Route("UpdateAttribute")]
+        [ResponseType(typeof(Model.DTO.SensorAttribute))]
+        public async Task<IHttpActionResult> UpdateSensorAttribute(Model.DTO.SensorAttribute SensorAttribute)
+        {
+            return Ok(await _sensorApplicationService.UpdateSensorAttribute(SensorAttribute));
+        }
+
+
+        /// <summary>
         /// Assigns sensor to the specified network
         /// </summary>
         /// <param name="SensorID">Identifier of sensor to move</param>
@@ -103,21 +143,47 @@ namespace Coopers.BusinessLayer.API.Controllers
             return Ok(await _sensorApplicationService.AssignSensor(SensorID, NetworkID));
         }
 
+        /// <summary>
+        /// Assign the sensors to the specified network
+        /// </summary>
+        /// <param name="SensorBulkAssign">Sensor Bulk Assign Model</param>
+        /// <returns>Success if Sensor assigned successfully</returns>
+        [HttpPut]
+        [Route("BulkAssignTo")]
+        [ResponseType(typeof(List<Model.DTO.SensorBulkResponse>))]
+        public async Task<IHttpActionResult> BulkAssignSensor([FromBody]Model.DTO.SensorBulkAssign SensorBulkAssign)
+        {
+            return Ok(await _sensorApplicationService.BulkAssignSensor(SensorBulkAssign));
+        }
+
         #endregion
 
         #region DELETE | APIs
 
         /// <summary>
-        /// Removes the sensor object from the network.
+        /// Removes the sensors object from the network.
         /// </summary>
-        /// <param name="SensorID">Unique identifier of the sensor</param>
-        /// <returns>Success if Sensor removed successfully</returns>
+        /// <param name="SensorID">unique identofier for the network</param>
+        /// <returns>Success if Sensors removed successfully else failure</returns>
         [HttpDelete]
-        [Route("Remove/{SensorID}")]
-        [ResponseType(typeof(string))]
+        [Route("{SensorID}/Remove")]
+        [ResponseType(typeof(List<Model.DTO.SensorBulkResponse>))]
         public async Task<IHttpActionResult> RemoveSensor(long SensorID)
         {
             return Ok(await _sensorApplicationService.RemoveSensor(SensorID));
+        }
+
+        /// <summary>
+        /// Removes the sensors from the network.
+        /// </summary>
+        /// <param name="SensorIDs">List of sensor ids</param>
+        /// <returns>Success if Sensors removed successfully else failure</returns>
+        [HttpDelete]
+        [Route("BulkRemove")]
+        [ResponseType(typeof(List<Model.DTO.SensorBulkResponse>))]
+        public async Task<IHttpActionResult> RemoveSensor(List<long> SensorIDs)
+        {
+            return Ok(await _sensorApplicationService.BulkRemoveSensor(SensorIDs));
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using Coopers.BusinessLayer.Model.DTO;
 using Coopers.BusinessLayer.NotifEye.APIClient;
 using Coopers.BusinessLayer.Utility;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Coopers.BusinessLayer.Services.Services
@@ -46,22 +47,58 @@ namespace Coopers.BusinessLayer.Services.Services
         /// </summary>
         /// <param name="GatewayID">Identifier of gateway to move</param>
         /// <param name="NetworkID">Identifier of network on your account</param>
-        /// <returns>true/false</returns>
-        public async Task<bool> AssignGateway(long GatewayID, long NetworkID)
+        /// <returns>Success/Failure</returns>
+        public async Task<string> AssignGateway(long GatewayID, long NetworkID)
         {
             var CheckDigit = CheckDigitGenerator.GenerateSecurityCode(GatewayID.ToString());
             return await _gatewayClient.AssignGateway(GatewayID, NetworkID, CheckDigit);
         }
 
         /// <summary>
+        /// Assigns gateways to the specified network
+        /// </summary>
+        /// <param name="GatewayBulkAssign">GatewayBulkAssign model</param>
+        /// <returns>list of GatewayBulkResponse</returns>
+        public async Task<List<GatewayBulkResponse>> BulkAssignGateway(GatewayBulkAssign GatewayBulkAssign)
+        {
+            List<GatewayBulkResponse> response = new List<GatewayBulkResponse>();
+
+            foreach (var gatewayID in GatewayBulkAssign.GatewayIDs)
+            {
+                response.Add(new GatewayBulkResponse() { GatewayID = gatewayID, Result = await AssignGateway(gatewayID, GatewayBulkAssign.NetworkID) });
+            }
+
+            return response;
+        }
+
+
+        /// <summary>
         /// Removes the gateway object from the network.
         /// </summary>
         /// <param name="GatewayID">Unique identifier of the gateway</param>
         /// <returns>true/false</returns>
-        public async Task<bool> RemoveGateway(long GatewayID)
+        public async Task<string> RemoveGateway(long GatewayID)
         {
             return await _gatewayClient.RemoveGateway(GatewayID);
         }
+
+        /// <summary>
+        /// Removes the gateway object from the network.
+        /// </summary>
+        /// <param name="GatewayID">List of the gateway ids</param>
+        /// <returns>list of GatewayBulkResponse mdoel</returns>
+        public async Task<List<GatewayBulkResponse>> BulkRemoveGateway(List<long> GatewayIDs)
+        {
+            List<GatewayBulkResponse> response = new List<GatewayBulkResponse>();
+
+            foreach (var gatwayID in GatewayIDs)
+            {
+                response.Add(new GatewayBulkResponse() { GatewayID = gatwayID, Result = await RemoveGateway(gatwayID) });
+            }
+
+            return response;
+        }
+
 
         /// <summary>
         /// Create a gateway
@@ -71,6 +108,16 @@ namespace Coopers.BusinessLayer.Services.Services
         public async Task<int> CreateGateway(Gateway Gateway)
         {
             return await _gatewayClient.CreateGateway(Gateway);
+        }
+
+        /// <summary>
+        /// Update the Gateway
+        /// </summary>
+        /// <param name="UpdateGateway">Gateway Model</param>
+        /// <returns>No of records updated</returns>
+        public async Task<int> UpdateGateway(UpdateGateway UpdateGateway)
+        {
+            return await _gatewayClient.UpdateGateway(UpdateGateway);
         }
 
         #endregion

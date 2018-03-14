@@ -40,16 +40,16 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="GatewayID">Identifier of gateway to move</param>
         /// <param name="NetworkID">Identifier of network on your account</param>
         /// <param name="CheckDigit">Check digit to prevent unauthorized movement of gateways</param>
-        /// <returns>true/false</returns>
-        Task<bool> AssignGateway(long GatewayID, long NetworkID, string CheckDigit);
+        /// <returns>Success/Failure</returns>
+        Task<string> AssignGateway(long GatewayID, long NetworkID, string CheckDigit);
 
 
         /// <summary>
         /// Removes the gateway object from the network.
         /// </summary>
         /// <param name="SensorID">Unique identifier of the gateway</param>
-        /// <returns>true/false</returns>
-        Task<bool> RemoveGateway(long GatewayID);
+        /// <returns>Success/Failure</returns>
+        Task<string> RemoveGateway(long GatewayID);
 
         /// <summary>
         /// Create a gateway
@@ -58,5 +58,11 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>if created 1 else 0  </returns>
         Task<int> CreateGateway(Gateway Gateway);
 
+        /// <summary>
+        /// Update the Gateway
+        /// </summary>
+        /// <param name="UpdateGateway">Gateway Model</param>
+        /// <returns>No of records updated</returns>
+        Task<int> UpdateGateway(UpdateGateway UpdateGateway);
     }
 }

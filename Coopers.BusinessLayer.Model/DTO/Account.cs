@@ -52,6 +52,8 @@ namespace Coopers.BusinessLayer.Model.DTO
     {
         public long AccountID { get; set; }
 
+        //public int TimeZoneID { get; set; }
+
         public int ResellerID { get; set; }
 
         public string CompanyName { get; set; }

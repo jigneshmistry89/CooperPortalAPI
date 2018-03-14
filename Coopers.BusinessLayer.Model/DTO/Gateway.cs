@@ -30,4 +30,37 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public int CustomerID { get; set; }
     }
+
+    public class UpdateGateway
+    {
+        public long GatewayID { get; set; }
+
+        public long NetworkID { get; set; }
+
+        public string Name { get; set; }
+
+        public string GatewayType { get; set; }
+
+        public long SerialNumber { get; set; }
+
+        public string MacAddress { get; set; }
+
+        public int HeartBeat { get; set; }
+
+    }
+
+    public class GatewayBulkAssign
+    {
+        public List<long> GatewayIDs { get; set; }
+
+        public long NetworkID { get; set; }
+
+    }
+
+    public class GatewayBulkResponse
+    {
+        public long GatewayID { get; set; }
+
+        public string Result { get; set; }
+    }
 }

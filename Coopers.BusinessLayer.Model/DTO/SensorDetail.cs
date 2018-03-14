@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Coopers.BusinessLayer.Model.DTO
 {
@@ -56,6 +57,8 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public double DataFahrenheit { get; set; }
 
+        public string CorF { get; set; }
+
     }
 
     public class LastDataMessage
@@ -70,4 +73,36 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public int GatewayID { get; set; }
     }
+
+    public class SensorBulkAssign
+    {
+        public List<long> SensorIDs { get; set; }
+
+        public long NetworkID { get; set; }
+
+    }
+
+    public class SensorBulkResponse
+    {
+        public long SensorID { get; set; }
+
+        public string Result { get; set; }
+    }
+
+    public class UpdateSensor
+    {
+        public long SensorID { get; set; }
+        public string SensorName { get; set; }
+        public double HeartBeat { get; set; }
+    }
+
+    public class SensorAttribute
+    {
+        public long SensorID { get; set; }
+
+        public string Name { get; set; }
+
+        public string Value { get; set; }
+    }
+
 }

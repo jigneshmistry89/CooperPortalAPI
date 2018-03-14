@@ -102,10 +102,10 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="GatewayID">Identifier of gateway to move</param>
         /// <param name="NetworkID">Identifier of network on your account</param>
         /// <param name="CheckDigit">Check digit to prevent unauthorized movement of gateways</param>
-        /// <returns>true/false</returns>
-        public async Task<bool> AssignGateway(long GatewayID, long NetworkID, string CheckDigit)
+        /// <returns>Success/Failure</returns>
+        public async Task<string> AssignGateway(long GatewayID, long NetworkID, string CheckDigit)
         {
-            return await _httpService.GetAsAsync<bool>("AssignGateway", string.Format("GatewayID={0}&NetworkID={1}&CheckDigit={2}", GatewayID, NetworkID, CheckDigit), false);
+            return await _httpService.GetAsAsync<string>("AssignGateway", string.Format("GatewayID={0}&NetworkID={1}&CheckDigit={2}", GatewayID, NetworkID, CheckDigit), false);
         }
 
 
@@ -114,9 +114,9 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// </summary>
         /// <param name="SensorID">Unique identifier of the gateway</param>
         /// <returns>true/false</returns>
-        public async Task<bool> RemoveGateway(long GatewayID)
+        public async Task<string> RemoveGateway(long GatewayID)
         {
-            return await _httpService.GetAsAsync<bool>("RemoveGateway", string.Format("GatewayID={0}", GatewayID), false);
+            return await _httpService.GetAsAsync<string>("RemoveGateway", string.Format("GatewayID={0}", GatewayID), false);
         }
 
         #endregion
@@ -132,6 +132,17 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         public async Task<int> CreateGateway(Gateway Gateway)
         {
             return await _httpService.PostAsAsync<int>("gateway/CreateGateway", Gateway);
+        }
+
+        /// <summary>
+        /// Update the Gateway
+        /// </summary>
+        /// <param name="UpdateGateway">Gateway Model</param>
+        /// <returns>No of records updated</returns>
+        public async Task<int> UpdateGateway(UpdateGateway UpdateGateway)
+        {
+            string path = string.Format("gateway/UpdateGateway?NetworkID={0}", UpdateGateway.NetworkID);
+            return await _httpService.PutAsAsync<int>(path, UpdateGateway);
         }
 
         #endregion

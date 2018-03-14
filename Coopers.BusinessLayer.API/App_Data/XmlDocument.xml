@@ -699,20 +699,41 @@
             <param name="Status">Filters list to gateway that match this status</param>
             <returns>gateway list</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.UpdateGateway(Coopers.BusinessLayer.Model.DTO.UpdateGateway)">
+            <summary>
+            Update the Gateway
+            </summary>
+            <param name="UpdateGateway">Gateway Model</param>
+            <returns>No of records updated</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.AssignGateway(System.Int64,System.Int64)">
             <summary>
             Assigns gateway to the specified network
             </summary>
             <param name="GatewayID">Identifier of gateway to move</param>
             <param name="NetworkID">Identifier of network on your account</param>
-            <returns></returns>
+            <returns>Success/Failure</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.BulkAssignGateway(Coopers.BusinessLayer.Model.DTO.GatewayBulkAssign)">
+            <summary>
+            Assigns gateways to the specified network
+            </summary>
+            <param name="GatewayBulkAssign">GatewayBulkAssign model</param>
+            <returns>list of GatewayBulkResponse</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.RemoveGateway(System.Int64)">
             <summary>
             Removes the gateway object from the network.
             </summary>
             <param name="GatewayID">Unique identifier of the gateway</param>
-            <returns>true/false</returns>
+            <returns>Success/Failure</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.BulkRemoveGateway(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Removes the gateways from the network.
+            </summary>
+            <param name="GatewayIDs">Lis of gateway ids</param>
+            <returns>list of GatewayBulkResponse model</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.CreateGateway(Coopers.BusinessLayer.Model.DTO.Gateway)">
             <summary>
@@ -801,6 +822,27 @@
             <param name="Name">String (optional)	Filters list to sensors with names containing this string. (case-insensitive)</param>
             <returns>Returns the list of sensors that belongs to user.</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensor(Coopers.BusinessLayer.Model.DTO.UpdateSensor)">
+            <summary>
+            Update the SensorName and the Heartbeat info
+            </summary>
+            <param name="UpdateSensor">Update sensor model</param>
+            <returns>Success/Failure</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.BulkUpdateSensor(System.Collections.Generic.List{Coopers.BusinessLayer.Model.DTO.UpdateSensor})">
+            <summary>
+            Bulk Update sensor details 
+            </summary>
+            <param name="UpdateSensors">List of BulkUpdate model</param>
+            <returns>List of SensorBulkResponse</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensorAttribute(Coopers.BusinessLayer.Model.DTO.SensorAttribute)">
+            <summary>
+            Creates/Updates sensor attribute.
+            </summary>
+            <param name="SensorAttribute">Sensor attribute model</param>
+            <returns>Created/Updated Sensor attribute model</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.AssignSensor(System.Int64,System.Int64)">
             <summary>
             Assigns sensor to the specified network
@@ -809,12 +851,26 @@
             <param name="NetworkID">Identifier of network on your account</param>
             <returns>Success if Sensor assigned successfully</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.BulkAssignSensor(Coopers.BusinessLayer.Model.DTO.SensorBulkAssign)">
+            <summary>
+            Assign the sensors to the specified network
+            </summary>
+            <param name="SensorBulkAssign">Sensor Bulk Assign Model</param>
+            <returns>Success if Sensor assigned successfully</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.RemoveSensor(System.Int64)">
             <summary>
-            Removes the sensor object from the network.
+            Removes the sensors object from the network.
             </summary>
-            <param name="SensorID">Unique identifier of the sensor</param>
-            <returns>Success if Sensor removed successfully</returns>
+            <param name="SensorID">unique identofier for the network</param>
+            <returns>Success if Sensors removed successfully else failure</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.RemoveSensor(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Removes the sensors from the network.
+            </summary>
+            <param name="SensorIDs">List of sensor ids</param>
+            <returns>Success if Sensors removed successfully else failure</returns>
         </member>
         <member name="T:Coopers.BusinessLayer.API.Controllers.TokenController">
             <summary>
