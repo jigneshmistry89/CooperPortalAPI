@@ -4,6 +4,7 @@
 
 /Coopers.BusinessLayer.API/obj
 /Coopers.BusinessLayer.API/bin
+/Coopers.BusinessLayer.API/Coopers.BusinessLayer.API.csproj.user
 /Coopers.BusinessLayer.Database.API/bin
 /Coopers.BusinessLayer.Database.API/obj
 /Coopers.BusinessLayer.Database.Domain/obj
@@ -24,3 +25,5 @@
 /Coopers.BusinessLayer.Services/bin
 /Coopers.BusinessLayer.Utility/obj
 /Coopers.BusinessLayer.Utility/bin
+/packages
+/.vs
