@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Coopers.BusinessLayer.Model.DTO
+{
+    public class Notification
+    {
+        public long NotificationID { get; set; }
+
+        public string Name { get; set; }
+
+        public string NotificationClass { get; set; }
+
+        public long DeviceID { get; set; }
+
+        public string DeviceName { get; set; }
+
+        public string DeviceType { get; set; }
+
+        public string Reading { get; set; }
+
+        public DateTime NotificationDate { get; set; }
+
+        public string Text { get; set; }
+
+        public long SentNotificationID { get; set; }
+
+        public long UserID { get; set; }
+
+        public string UserName { get; set; }
+
+        public string SMSNumber { get; set; }
+
+        public string Email { get; set; }
+
+        public string Type { get; set; }
+
+        public string Status { get; set; }
+
+    }
+
+    public class SentNotificationResponse
+    {
+        public List<Notification> Notification { get; set;  }
+
+    }
+
+    public class NotitifcationWithSchedules
+    {
+        public string Text { get; set; }
+
+        public string Name { get; set; }
+
+        public string Scale { get; set; }
+
+        public string NotificationClass { get; set; }
+
+        public string CompareType { get; set; }
+
+        public double ComparerValue { get; set; }
+
+        public long AccountID { get; set; }
+
+        public long AdvancedNotificationID { get; set; }
+
+        public int MonnitApplicationID { get; set; }
+
+        public long GatewayID { get; set; }
+
+        public long SensorID { get; set; }
+
+        public float Snooze { get; set; }
+
+        public string StartTime { get; set; }
+
+
+        public string EndTime { get; set; }
+
+        public Schedule Schedule { get; set; }
+
+    }
+
+    public class Schedule
+    {
+        public string SundayDayOfWeek { get; set; }
+
+        public string MondayDayOfWeek { get; set; }
+
+        public string TuesdayDayOfWeek { get; set; }
+
+        public string WednesdayDayOfWeek { get; set; }
+
+        public string ThursdayDayOfWeek { get; set; }
+
+        public string FridayDayOfWeek { get; set; }
+
+        public string SaturdayDayOfWeek { get; set; }
+
+    }
+
+}

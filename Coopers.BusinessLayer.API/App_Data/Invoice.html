@@ -1,0 +1,24 @@
+﻿<header class='clearfix'>
+    <h1>INVOICE</h1>
+    <div id='company' class='clearfix'>
+        <div>{%CompanyName%}</div>
+        <div>{%CompanyAddress%}</div>
+        <div><a href='mailto:company@example.com'>{%Email%}</a></div>
+    </div>
+</header>
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th class='service'># of Sensors</th>
+                <th>Total Annual Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class='service'>{%NoOfSensors%}</td>
+                <td class='unit'>{%Amount%}</td>
+            </tr>
+        </tbody>
+    </table>
+</main>
