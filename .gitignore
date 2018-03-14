@@ -3,3 +3,24 @@
 ################################################################################
 
 /Coopers.BusinessLayer.API/obj
+/Coopers.BusinessLayer.API/bin
+/Coopers.BusinessLayer.Database.API/bin
+/Coopers.BusinessLayer.Database.API/obj
+/Coopers.BusinessLayer.Database.Domain/obj
+/Coopers.BusinessLayer.Database.Domain/bin
+/Coopers.BusinessLayer.Database.Models/obj
+/Coopers.BusinessLayer.Database.Models/bin
+/Coopers.BusinessLayer.Database.APIClient/obj
+/Coopers.BusinessLayer.Database.APIClient/bin
+/Coopers.BusinessLayer.Database.Repositories/obj
+/Coopers.BusinessLayer.Database.Repositories/bin
+/Coopers.BusinessLayer.Localizer/obj
+/Coopers.BusinessLayer.Localizer/bin
+/Coopers.BusinessLayer.Model/obj
+/Coopers.BusinessLayer.Model/bin
+/Coopers.BusinessLayer.NotifEye.APIClient/obj
+/Coopers.BusinessLayer.NotifEye.APIClient/bin
+/Coopers.BusinessLayer.Services/obj
+/Coopers.BusinessLayer.Services/bin
+/Coopers.BusinessLayer.Utility/obj
+/Coopers.BusinessLayer.Utility/bin
