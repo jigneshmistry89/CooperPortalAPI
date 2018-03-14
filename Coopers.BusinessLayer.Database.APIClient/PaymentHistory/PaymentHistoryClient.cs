@@ -75,9 +75,14 @@ namespace Coopers.BusinessLayer.Database.APIClient
             }
         }
 
-        public async Task<List<PaymentHistory>> GetPaymentHistoryList(int Offset, int PageSize,long AccountID)
+        /// <summary>
+        /// Get the online paymenthistory for a given account
+        /// </summary>
+        /// <param name="AccountID">unique identifier for the Account</param>
+        /// <returns>List of payment histories</returns>
+        public async Task<List<PaymentHistory>> GetPaymentHistoryList(long AccountID)
         {
-            var QueryParam = string.Format("?Offset={0}&PageSize={1}&AccountID={2}", Offset, PageSize, AccountID);
+            var QueryParam = string.Format("?AccountID={0}", AccountID);
             HttpResponseMessage response = await new HttpClient().GetAsync(PaymentHistoryEndPoint + "List" + QueryParam);
             if (response.IsSuccessStatusCode)
             {

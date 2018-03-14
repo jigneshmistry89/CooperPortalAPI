@@ -9,6 +9,7 @@ using Coopers.BusinessLayer.Model.Interface;
 using AutoMapper;
 using System.Web;
 using System.Linq;
+using Coopers.BusinessLayer.NotifEye.APIClient;
 
 namespace Coopers.BusinessLayer.Services.Services
 {
@@ -20,19 +21,19 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly IPaymentHistoryClient _paymentHistoryClient;
         private readonly IHttpContextProvider _iHttpContextProvider;
         private readonly IMapper _mapper;
-        private readonly IAccountApplicationService _accountApplicationService;
+        private readonly IAccountClient _accountClient;
 
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public PaymentHistoryApplicationService(IAccountApplicationService accountApplicationService, IHttpContextProvider iHttpContextProvider, IPaymentHistoryClient paymentHistoryClient, IMapper mapper)
+        public PaymentHistoryApplicationService(IAccountClient accountClient, IHttpContextProvider iHttpContextProvider, IPaymentHistoryClient paymentHistoryClient, IMapper mapper)
         {
             _paymentHistoryClient = paymentHistoryClient;
             _iHttpContextProvider = iHttpContextProvider;
             _mapper = mapper;
-            _accountApplicationService = accountApplicationService;
+            _accountClient = accountClient;
         }
 
         #endregion
@@ -43,10 +44,8 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <summary>
         /// Get the paged PaymentHistory records for the current account 
         /// </summary>
-        /// <param name="Offset">no of records to skip</param>
-        /// <param name="PageSize">no of record to fetch</param>
         /// <returns>PaymetnHistory List</returns>
-        public async Task<List<PaymentHistoryInfo>> GetPaymentHistoryList(int Offset, int PageSize)
+        public async Task<List<PaymentHistoryInfo>> GetPaymentHistoryList()
         {
             //Get the accountID of the currently loggedin user.
             var accID = await _iHttpContextProvider.GetCurrentUserAccountID();
@@ -137,7 +136,7 @@ namespace Coopers.BusinessLayer.Services.Services
             var paymentHistoryInfo = new PaymentHistoryInfo();
 
             //Get the online payment histories
-            var paymentHistories = await _paymentHistoryClient.GetPaymentHistoryList(0, 100, AccountID);
+            var paymentHistories = await _paymentHistoryClient.GetPaymentHistoryList(AccountID);
 
             foreach (var history in paymentHistories)
             {
@@ -159,7 +158,7 @@ namespace Coopers.BusinessLayer.Services.Services
             List<PaymentHistoryInfo> retVal = new List<PaymentHistoryInfo>();
 
             //Get the manual paymenthistories
-            var manualPaymentHistories = await _accountApplicationService.GetAccountSubscriptionHistory(AccountID);
+            var manualPaymentHistories = await _accountClient.GetAccountSubscriptionHistory(AccountID);
 
             foreach (var paymentHistory in manualPaymentHistories)
             {

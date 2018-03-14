@@ -7,6 +7,6 @@ namespace Coopers.BusinessLayer.Database.Domain.IRepositories
 
     public interface IPaymentHistoryRepository : IRepository<PaymentHistory, long>
     {
-        Task<List<PaymentHistory>> GetPaymentHistoryList(int Offset, int PageSize, long AccountID);
+        Task<List<PaymentHistory>> GetPaymentHistoryList(long AccountID);
     }
 }

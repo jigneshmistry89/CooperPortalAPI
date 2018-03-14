@@ -1,5 +1,6 @@
 ﻿using Coopers.BusinessLayer.Model.DTO;
 using Coopers.BusinessLayer.NotifEye.APIClient.HttpService;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -116,7 +117,21 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>List of PaymentHistories</returns>
         public async Task<List<ManualPaymentHistory>> GetAccountSubscriptionHistory(long AccountID)
         {
-            return await _httpService.GetAsAsync<List<ManualPaymentHistory>>("account/GetAccountSubscriptionHistory", string.Format("AccountID={0}", AccountID), true, false);
+            List<ManualPaymentHistory> history = new List<ManualPaymentHistory>();
+
+            try
+            {
+                history = await _httpService.GetAsAsync<List<ManualPaymentHistory>>("account/GetAccountSubscriptionHistory", string.Format("AccountID={0}", AccountID), true, false);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message != "No Subscriptions found.")
+                {
+                    throw ex;
+                }
+            }
+
+            return history;
         }
 
         /// <summary>

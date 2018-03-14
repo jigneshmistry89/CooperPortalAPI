@@ -9,10 +9,8 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <summary>
         /// Get the paged PaymentHistory records for the current account 
         /// </summary>
-        /// <param name="Offset">no of records to skip</param>
-        /// <param name="PageSize">no of record to fetch</param>
         /// <returns>PaymetnHistory List</returns>
-        Task<List<PaymentHistoryInfo>> GetPaymentHistoryList(int Offset, int PageSize);
+        Task<List<PaymentHistoryInfo>> GetPaymentHistoryList();
 
         /// <summary>
         /// Create PaymentHistory record

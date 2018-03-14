@@ -59,7 +59,7 @@ namespace Coopers.BusinessLayer.Services.Services
             if(userDetail.User.Admin)
             {
 
-                userDetail.PaymentHistories = await _paymentHistoryApplicationService.GetPaymentHistoryList(0, 50);
+                userDetail.PaymentHistories = await _paymentHistoryApplicationService.GetPaymentHistoryList();
                 userDetail.Users = await _accountApplicationService.GetAccountUserList(userDetail.User.Account[0].AccountID);
             }
 

@@ -32,9 +32,9 @@ namespace Coopers.BusinessLayer.Database.Repositories.Repository
 
         #region INTERFACE IMPLEMENTATION          
 
-        public async Task<List<PaymentHistory>> GetPaymentHistoryList(int Offset,int PageSize,long AccountID)
+        public async Task<List<PaymentHistory>> GetPaymentHistoryList(long AccountID)
         {
-            return await _dbset.Where(x=>x.AccountID == AccountID).OrderByDescending(x => x.ID).Skip(Offset).Take(PageSize).ToListAsync();
+            return await _dbset.Where(x=>x.AccountID == AccountID).OrderByDescending(x => x.ID).ToListAsync();
         }
 
         #endregion

@@ -23,7 +23,7 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly ISensorClient _sensorClient;
         private readonly IGatewayClient _gatewayClient;
         private readonly IMapper _mapper;
-
+        
         #endregion
 
 

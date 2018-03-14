@@ -13,6 +13,5 @@ namespace Coopers.BusinessLayer.Services.Services
 
         Task<byte[]> GenerateInvoice(long PatmentHistoryID);
 
-        Task<List<PaymentHistoryInfo>> GetPaymentHistoryList(int Offset, int PageSize);
     }
 }

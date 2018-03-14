@@ -78,15 +78,6 @@ namespace Coopers.BusinessLayer.API.Controllers
             return result;
         }
 
-        [HttpGet]
-        [Route("PaymentHistoryList")]
-        [ResponseType(typeof(Transaction))]
-        public async Task<IHttpActionResult> PaymentHistoryList(int Offset,int PageSize)
-        {
-            return Ok(await _paymentApplicationService.GetPaymentHistoryList(Offset, PageSize));
-        }
-
-
         #endregion
 
 

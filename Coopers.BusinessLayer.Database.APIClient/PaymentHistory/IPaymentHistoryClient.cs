@@ -28,7 +28,12 @@ namespace Coopers.BusinessLayer.Database.APIClient
         /// <returns>PaymentHistory Model</returns>
         Task<PaymentHistory> GetPaymentHistoryByID(long PaymentHistoryID);
 
-        Task<List<PaymentHistory>> GetPaymentHistoryList(int Offset, int PageSize, long AccountID);
+        /// <summary>
+        /// Get the online paymenthistory for a given account
+        /// </summary>
+        /// <param name="AccountID">unique identifier for the Account</param>
+        /// <returns>List of payment histories</returns>
+        Task<List<PaymentHistory>> GetPaymentHistoryList(long AccountID);
 
     }
 }

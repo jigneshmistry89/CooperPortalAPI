@@ -1,7 +1,5 @@
-﻿using Coopers.BusinessLayer.NotifEye.APIClient;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Coopers.BusinessLayer.Model.DTO;
-using AutoMapper;
 using Stripe;
 using Coopers.BusinessLayer.Database.APIClient;
 using System;
@@ -10,7 +8,6 @@ using Coopers.BusinessLayer.Utility;
 using System.IO;
 using Coopers.BusinessLayer.Localizer;
 using System.Web;
-using System.Collections.Generic;
 using Coopers.BusinessLayer.Model.Interface;
 
 namespace Coopers.BusinessLayer.Services.Services
@@ -151,11 +148,6 @@ namespace Coopers.BusinessLayer.Services.Services
             }
 
            return _pdfExportApplicationService.GeneratePDF(template);
-        }
-
-        public async Task<List<PaymentHistoryInfo>> GetPaymentHistoryList(int Offset, int PageSize)
-        {
-            return await _paymentHistoryApplicationService.GetPaymentHistoryList(Offset, PageSize);
         }
 
         #endregion
