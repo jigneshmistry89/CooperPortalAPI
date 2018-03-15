@@ -1,6 +1,6 @@
 ﻿using Coopers.BusinessLayer.NotifEye.APIClient;
 using System.Threading.Tasks;
-using AutoMapper;
+using System.Linq;
 using Coopers.BusinessLayer.Model.DTO;
 using Coopers.BusinessLayer.Localizer;
 using System.Configuration;
@@ -140,6 +140,8 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>success/failure</returns>
         public async Task<string> UpdateUser(UpdateUser User)
         {
+            //UserPermission userPermissions = new UserPermission { CustomerID = User.UserID, NetworkList = User.NetworkPermissions };
+            //await _userClient.UpdateUserPermissions(userPermissions);
             return await _userClient.UpdateUser(User);
         }
 

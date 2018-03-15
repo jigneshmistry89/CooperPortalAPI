@@ -10,7 +10,7 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public List<int> PermissionList { get; set; }
 
-        public List<int> NetworkList { get; set; }
+        public List<long> NetworkList { get; set; }
 
     }
 
