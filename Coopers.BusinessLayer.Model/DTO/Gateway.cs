@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,26 +34,35 @@ namespace Coopers.BusinessLayer.Model.DTO
 
     public class UpdateGateway
     {
+        [Required]
         public long GatewayID { get; set; }
 
+        [Required]
         public long NetworkID { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string GatewayType { get; set; }
 
+        [Required]
         public long SerialNumber { get; set; }
 
+        [Required]
         public string MacAddress { get; set; }
 
+        [Required]
         public int HeartBeat { get; set; }
 
     }
 
     public class GatewayBulkAssign
     {
+        [Required]
         public List<long> GatewayIDs { get; set; }
 
+        [Required]
         public long NetworkID { get; set; }
 
     }

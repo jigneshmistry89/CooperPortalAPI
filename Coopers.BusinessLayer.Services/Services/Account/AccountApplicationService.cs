@@ -23,13 +23,14 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly ISensorClient _sensorClient;
         private readonly IGatewayClient _gatewayClient;
         private readonly IMapper _mapper;
-        
+        private readonly IPaymentHistoryApplicationService _paymentHistoryApplicationService;
+
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public AccountApplicationService(ITaxableStateClient taxableStateClient, IAccountClient accountClient, ISensorClient sensorClient, IGatewayClient gatewayClient, INetworkClient networkClient,IMapper mapper)
+        public AccountApplicationService(IPaymentHistoryApplicationService paymentHistoryApplicationService,ITaxableStateClient taxableStateClient, IAccountClient accountClient, ISensorClient sensorClient, IGatewayClient gatewayClient, INetworkClient networkClient,IMapper mapper)
         {
             _sensorClient = sensorClient;
             _taxableStateClient = taxableStateClient;
@@ -37,6 +38,7 @@ namespace Coopers.BusinessLayer.Services.Services
             _networkClient = networkClient;
             _gatewayClient = gatewayClient;
             _mapper = mapper;
+            _paymentHistoryApplicationService = paymentHistoryApplicationService;
         }
 
         #endregion
@@ -129,10 +131,10 @@ namespace Coopers.BusinessLayer.Services.Services
 
                 foreach (var network in AccountResource.Networks)
                 {
-                    var sensors = await _sensorClient.GetSensorListByNetworkID(network.CSNetID);
+                    var sensors = await _sensorClient.GetSensorListByNetworkID(network.CSNetID, AccountDetails.AccountData[0].UserName);
                     AccountResource.Sensors.AddRange(_mapper.Map<List<SensorInfo>>(sensors));
 
-                    var gateways = await _gatewayClient.GetGatewayListByNetworkID(network.CSNetID);
+                    var gateways = await _gatewayClient.GetGatewayListByNetworkID(network.CSNetID, AccountDetails.AccountData[0].UserName);
                     AccountResource.Gateways.AddRange(_mapper.Map<List<GatewayInfo>>(gateways));
                 }
             }
@@ -147,6 +149,7 @@ namespace Coopers.BusinessLayer.Services.Services
                                                             };
             AccountResource.Customer =  (await PrepareCuctomersSummary(AccountDetails.AccountData, AccountNumSensors))[0];
             AccountResource.Customer.NumberOfGateways = AccountDetails.NumGateways;
+            AccountResource.PaymentHistories = await _paymentHistoryApplicationService.GetPaymentHistoryList();
             return AccountResource;
         }
 

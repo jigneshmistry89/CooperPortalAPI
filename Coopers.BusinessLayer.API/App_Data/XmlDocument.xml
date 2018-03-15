@@ -706,6 +706,13 @@
             <param name="UpdateGateway">Gateway Model</param>
             <returns>No of records updated</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.BulkUpdateGateway(System.Collections.Generic.List{Coopers.BusinessLayer.Model.DTO.UpdateGateway})">
+            <summary>
+            Bulk update Gateways
+            </summary>
+            <param name="UpdateGateways">Bulk Update Gateway Model</param>
+            <returns>Result of the bulk Update</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.GatewayController.AssignGateway(System.Int64,System.Int64)">
             <summary>
             Assigns gateway to the specified network

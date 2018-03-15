@@ -16,7 +16,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="ApplicationID">Filters list to gateway that are this application type</param>
         /// <param name="Status">Filters list to gateway that match this status</param>
         /// <returns>gateway list</returns>
-        Task<List<GatewayDTO>> GetGatewayList(string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0);
+        Task<List<GatewayDTO>> GetGatewayList(string UserName, string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0);
 
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// </summary>
         /// <param name="NetworkID">Filters list to gateway that belong to this network id</param>
         /// <returns>List of GatewayDTO</returns>
-        Task<List<GatewayDTO>> GetGatewayListByNetworkID(long NetworkID);
+        Task<List<GatewayDTO>> GetGatewayListByNetworkID(long NetworkID,string UserName = "");
 
 
         /// <summary>

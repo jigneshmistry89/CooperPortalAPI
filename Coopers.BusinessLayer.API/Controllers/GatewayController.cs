@@ -74,6 +74,19 @@ namespace Coopers.BusinessLayer.API.Controllers
             return Ok(await _gatewayApplicationService.UpdateGateway(UpdateGateway));
         }
 
+        /// <summary>
+        /// Bulk update Gateways
+        /// </summary>
+        /// <param name="UpdateGateways">Bulk Update Gateway Model</param>
+        /// <returns>Result of the bulk Update</returns>
+        [HttpPut]
+        [Route("BulkUpdate")]
+        [ResponseType(typeof(List<GatewayBulkResponse>))]
+        public async Task<IHttpActionResult> BulkUpdateGateway(List<UpdateGateway> UpdateGateways)
+        {
+            return Ok(await _gatewayApplicationService.BulkUpdateGateway(UpdateGateways));
+        }
+
 
         /// <summary>
         /// Assigns gateway to the specified network

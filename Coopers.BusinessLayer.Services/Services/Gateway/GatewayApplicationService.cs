@@ -39,7 +39,7 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>gateway list</returns>
         public async Task<object> GetGatewayList(string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0)
         {
-            return await _gatewayClient.GetGatewayList(Name, NetworkID, ApplicationID, Status);
+            return await _gatewayClient.GetGatewayList("",Name, NetworkID, ApplicationID, Status);
         }
 
         /// <summary>
@@ -118,6 +118,23 @@ namespace Coopers.BusinessLayer.Services.Services
         public async Task<int> UpdateGateway(UpdateGateway UpdateGateway)
         {
             return await _gatewayClient.UpdateGateway(UpdateGateway);
+        }
+
+        /// <summary>
+        /// Update the Gateways
+        /// </summary>
+        /// <param name="UpdateGateways">List of the updateGateway model</param>
+        /// <returns>List of GatewayBulkResponse</returns>
+        public async Task<List<GatewayBulkResponse>> BulkUpdateGateway(List<UpdateGateway> UpdateGateways)
+        {
+            List<GatewayBulkResponse> response = new List<GatewayBulkResponse>();
+
+            foreach (var updateGateway in UpdateGateways)
+            {
+                response.Add(new GatewayBulkResponse() { GatewayID = updateGateway.GatewayID, Result = await UpdateGateway(updateGateway) == 1 ? "Success" : "Failure" });
+            }
+
+            return response;
         }
 
         #endregion

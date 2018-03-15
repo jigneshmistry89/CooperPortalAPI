@@ -49,7 +49,7 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>Returns the list of sensors that belongs to user.</returns>
         public async Task<object> GetSensorList(string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0)
         {
-            return await _sensorClient.GetSensorList(Name, NetworkID, ApplicationID, Status);
+            return await _sensorClient.GetSensorList("",Name, NetworkID, ApplicationID, Status);
         }
 
         /// <summary>

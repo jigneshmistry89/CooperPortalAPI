@@ -9,6 +9,8 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.DTO
         /// </summary>
         public long SensorID { get; set; }
 
+        public long ReportInterval { get; set; }
+
         public short MonnitApplicationID { get; set; }
 
         public long CSNetID { get; set; }

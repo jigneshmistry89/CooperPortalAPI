@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coopers.BusinessLayer.Model.DTO
 {
@@ -50,24 +51,34 @@ namespace Coopers.BusinessLayer.Model.DTO
 
     public class UpdateAccount
     {
+        [Required]
         public long AccountID { get; set; }
 
-        //public int TimeZoneID { get; set; }
+        [Required]
+        public int TimeZone { get; set; }
 
+        [Required]
         public int ResellerID { get; set; }
 
+        [Required]
         public string CompanyName { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
+        [Required]
         public string Address2 { get; set; }
 
+        [Required]
         public string City { get; set; }
 
+        [Required]
         public string State { get; set; }
 
+        [Required]
         public string PostalCode { get; set; }
 
+        [Required]
         public string Country { get; set; }
     }
 

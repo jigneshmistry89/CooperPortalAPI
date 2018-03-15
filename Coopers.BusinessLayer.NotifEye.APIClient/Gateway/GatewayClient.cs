@@ -37,7 +37,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="ApplicationID">Filters list to gateway that are this application type</param>
         /// <param name="Status">Filters list to gateway that match this status</param>
         /// <returns>gateway list</returns>
-        public async Task<List<GatewayDTO>> GetGatewayList(string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0)
+        public async Task<List<GatewayDTO>> GetGatewayList(string UserName, string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0)
         {
             string filter = "";
             if (!string.IsNullOrEmpty(Name))
@@ -59,7 +59,14 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
 
             filter = filter.EndsWith("&") ? filter.Remove(filter.Length - 1) : filter;
 
-            return await _httpService.GetAsAsync<List<GatewayDTO>>("GatewayList", filter, false);
+            if (string.IsNullOrEmpty(UserName))
+            {
+                return await _httpService.GetAsAsync<List<GatewayDTO>>("GatewayList", filter, false);
+            }
+            else
+            {
+                return await _httpService.GetWithUserAsync<List<GatewayDTO>>(UserName,"GatewayList", filter, false);
+            }
         }
 
 
@@ -68,9 +75,9 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// </summary>
         /// <param name="NetworkID">Filters list to gateway that belong to this network id</param>
         /// <returns>List of GatewayDTO</returns>
-        public async Task<List<GatewayDTO>> GetGatewayListByNetworkID(long NetworkID)
+        public async Task<List<GatewayDTO>> GetGatewayListByNetworkID(long NetworkID, string UserName = "")
         {
-            return await GetGatewayList("", NetworkID);
+            return await GetGatewayList(UserName,"", NetworkID);
         }
 
 

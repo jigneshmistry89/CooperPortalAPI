@@ -21,6 +21,7 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public List<UserInfo> Users { get; set; }
 
+        public List<PaymentHistoryInfo> PaymentHistories { get; set; }
 
     }
 

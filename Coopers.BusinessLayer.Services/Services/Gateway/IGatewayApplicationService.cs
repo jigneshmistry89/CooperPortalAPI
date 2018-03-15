@@ -61,5 +61,12 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>No of records updated</returns>
         Task<int> UpdateGateway(UpdateGateway UpdateGateway);
 
+        /// <summary>
+        /// Update the Gateways
+        /// </summary>
+        /// <param name="UpdateGateways">List of the updateGateway model</param>
+        /// <returns>List of GatewayBulkResponse</returns>
+        Task<List<GatewayBulkResponse>> BulkUpdateGateway(List<UpdateGateway> UpdateGateways);
+
     }
 }

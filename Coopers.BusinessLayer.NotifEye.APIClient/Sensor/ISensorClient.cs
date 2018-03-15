@@ -18,14 +18,14 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="Status">Integer (optional)	Filters list to sensor that match this status</param>
         /// <param name="Name">String (optional)	Filters list to sensors with names containing this string. (case-insensitive)</param>
         /// <returns>Returns the list of sensors that belongs to user.</returns>
-        Task<object> GetSensorList(string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0);
+        Task<object> GetSensorList(string UserName, string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0);
 
         /// <summary>
         /// Returns the list of sensors that belongs to currently loggedin user.
         /// </summary>
         /// <param name="NetworkID">Integer (optional)	Filters list to sensor that belong to this network id</param>
         /// <returns>Returns the list of sensors that belongs to user.</returns>
-        Task<List<SensorDetail>> GetSensorListByNetworkID(long NetworkID);
+        Task<List<SensorDetail>> GetSensorListByNetworkID(long NetworkID, string UserName = "");
         
 
         /// <summary>

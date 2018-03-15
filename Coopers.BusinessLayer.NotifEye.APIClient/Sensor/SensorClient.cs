@@ -40,7 +40,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="Status">Integer (optional)	Filters list to sensor that match this status</param>
         /// <param name="Name">String (optional)	Filters list to sensors with names containing this string. (case-insensitive)</param>
         /// <returns>Returns the list of sensors that belongs to user.</returns>
-        public async Task<object> GetSensorList(string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0)
+        public async Task<object> GetSensorList(string UserName,string Name = "", long NetworkID = 0, short ApplicationID = 0, short Status = 0)
         {
             string filter = "";
             if (!string.IsNullOrEmpty(Name))
@@ -62,7 +62,14 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
 
             filter = filter.EndsWith("&") ? filter.Remove(filter.Length - 1) : filter;
 
-            return await _httpService.GetAsAsync<object>("SensorList", filter, false, false);
+            if (string.IsNullOrEmpty(UserName))
+            {
+                return await _httpService.GetAsAsync<object>("SensorListExtended", filter, false, false);
+            }
+            else
+            {
+                return await _httpService.GetWithUserAsync<object>(UserName, "SensorListExtended", filter, false, false);
+            }
         }
 
         /// <summary>
@@ -70,9 +77,9 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// </summary>
         /// <param name="NetworkID">Integer (optional)	Filters list to sensor that belong to this network id</param>
         /// <returns>Returns the list of sensors that belongs to user.</returns>
-        public async Task<List<SensorDetail>> GetSensorListByNetworkID(long NetworkID)
+        public async Task<List<SensorDetail>> GetSensorListByNetworkID(long NetworkID, string UserName="")
         {
-            return JsonConvert.DeserializeObject<List<SensorDetail>>((await GetSensorList("", NetworkID)).ToString());
+            return JsonConvert.DeserializeObject<List<SensorDetail>>((await GetSensorList(UserName,"", NetworkID)).ToString());
         }
 
 
