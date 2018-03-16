@@ -23,13 +23,14 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly IPaymentHistoryApplicationService _paymentHistoryApplicationService;
         private readonly IPDFExportApplicationService _pdfExportApplicationService;
         private readonly IHttpContextProvider _iHttpContextProvider;
+        private readonly IEmailApplicationService _emailApplicationService;
 
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public PaymentApplicationService(IPaymentHistoryApplicationService paymentHistoryApplicationService,IHttpContextProvider iHttpContextProvider, 
+        public PaymentApplicationService(IEmailApplicationService emailApplicationService,IPaymentHistoryApplicationService paymentHistoryApplicationService,IHttpContextProvider iHttpContextProvider, 
                                             IPDFExportApplicationService pdfExportApplicationService,ITaxableStateClient taxableStateClient,
                                             IAccountApplicationService accountApplicationService, ITranscationCacheApplicationService transcationCacheApplicationService)
         {
@@ -39,6 +40,7 @@ namespace Coopers.BusinessLayer.Services.Services
             _pdfExportApplicationService = pdfExportApplicationService;
             _iHttpContextProvider = iHttpContextProvider;
             _paymentHistoryApplicationService = paymentHistoryApplicationService;
+            _emailApplicationService = emailApplicationService;
         }
 
         #endregion
@@ -89,6 +91,17 @@ namespace Coopers.BusinessLayer.Services.Services
 
                         if (retVal>0)
                         {
+                            var user = await _iHttpContextProvider.GetCurrentUser();
+
+                            //Get the template
+                            var template = File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Data/Payment Confirmation Email.html"));
+
+                            //Replace the link.
+                            template = template.Replace("{%PaymentReferenceNo%}", charge.Id);
+                            template = template.Replace("{%UserName%}", user.UserFullName);
+                            _emailApplicationService.SendAnEmail(template, user.Email, AppLocalizer.SubscriptionRenewed);
+
+
                             return new PaymentInfo
                             {
                                 PaymentHistoryID = paymentHistoryID,

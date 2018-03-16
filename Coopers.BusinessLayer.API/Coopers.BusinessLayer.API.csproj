@@ -295,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Invoice.html" />
+    <Content Include="App_Data\Payment Confirmation Email.html" />
     <Content Include="App_Data\Registration Email.html" />
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="App_Readme\Elmah.txt" />

@@ -33,6 +33,7 @@ namespace Coopers.BusinessLayer.Services.Services
             var to = new MailAddress(To);
             MailMessage mailMessage = new MailMessage(from, to);
             mailMessage.Subject = Subject;
+            mailMessage.CC.Add(new MailAddress("amar@trivediat.com"));
             mailMessage.Body = Template;
             mailMessage.IsBodyHtml = true;
             

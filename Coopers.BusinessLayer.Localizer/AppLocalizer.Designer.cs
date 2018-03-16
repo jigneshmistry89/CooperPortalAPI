@@ -178,6 +178,15 @@ namespace Coopers.BusinessLayer.Localizer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cooper At-Kins Portal Subscription Renewed.
+        /// </summary>
+        public static string SubscriptionRenewed {
+            get {
+                return ResourceManager.GetString("SubscriptionRenewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Registration Link.
         /// </summary>
         public static string UserRegistrationLink {

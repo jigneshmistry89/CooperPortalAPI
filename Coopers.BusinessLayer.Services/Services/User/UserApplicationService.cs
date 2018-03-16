@@ -89,6 +89,7 @@ namespace Coopers.BusinessLayer.Services.Services
 
             //Replace the link.
             template = template.Replace("{%RegistrationLink%}", link);
+            template = template.Replace("{%EmailID%}", UserEmail);
 
             //Send an email.
             _emailApplicationService.SendAnEmail(template, UserEmail, AppLocalizer.UserRegistrationLink);
