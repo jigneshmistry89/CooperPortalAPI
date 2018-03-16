@@ -18,6 +18,10 @@
 
         public string Country { get; set; }
 
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
+
         public int ActiveSensors { get; set; }
 
         public int Alerts { get; set; }

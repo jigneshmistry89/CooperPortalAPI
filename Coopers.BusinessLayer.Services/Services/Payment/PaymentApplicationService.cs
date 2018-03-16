@@ -92,6 +92,7 @@ namespace Coopers.BusinessLayer.Services.Services
                             return new PaymentInfo
                             {
                                 PaymentHistoryID = paymentHistoryID,
+                                StripeChargeID = charge.Id,
                                 Transaction = transcation
                             };
                         }

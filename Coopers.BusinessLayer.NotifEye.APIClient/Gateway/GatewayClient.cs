@@ -104,19 +104,6 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
 
 
         /// <summary>
-        /// Assigns gateway to the specified network
-        /// </summary>
-        /// <param name="GatewayID">Identifier of gateway to move</param>
-        /// <param name="NetworkID">Identifier of network on your account</param>
-        /// <param name="CheckDigit">Check digit to prevent unauthorized movement of gateways</param>
-        /// <returns>Success/Failure</returns>
-        public async Task<string> AssignGateway(long GatewayID, long NetworkID, string CheckDigit)
-        {
-            return await _httpService.GetAsAsync<string>("AssignGateway", string.Format("GatewayID={0}&NetworkID={1}&CheckDigit={2}", GatewayID, NetworkID, CheckDigit), false);
-        }
-
-
-        /// <summary>
         /// Removes the gateway object from the network.
         /// </summary>
         /// <param name="SensorID">Unique identifier of the gateway</param>
@@ -150,6 +137,17 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         {
             string path = string.Format("gateway/UpdateGateway?NetworkID={0}", UpdateGateway.NetworkID);
             return await _httpService.PutAsAsync<int>(path, UpdateGateway);
+        }
+
+        /// <summary>
+        /// Assigns gateway to the specified network
+        /// </summary>
+        /// <param name="GatewayID">Identifier of gateway to move</param>
+        /// <param name="NetworkID">Identifier of network on your account</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> AssignGateway(long GatewayID, long NetworkID)
+        {
+            return await _httpService.PostAsAsync<string>("gateway/AssignGateway?" + string.Format("GatewayID={0}&NetworkID={1}", GatewayID, NetworkID), "", false);
         }
 
         #endregion

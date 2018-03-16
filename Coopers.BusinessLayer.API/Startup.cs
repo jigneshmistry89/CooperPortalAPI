@@ -86,6 +86,9 @@ namespace Coopers.BusinessLayer.API
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));
                     x.CreateMap<UserLocationSummary, SensorSummary>().ReverseMap();
+                    x.CreateMap<UserLocationSummary, NotifEye.APIClient.DTO.Network>().ReverseMap()
+                                .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.NetworkID))
+                                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.NetworkName));
                     x.CreateMap<CreateNetwork, NetworkLocation>().ReverseMap();
                     x.CreateMap<Model.DTO.SensorDetail, NotifEye.APIClient.DTO.SensorDetail>().ReverseMap();
                     x.CreateMap<Model.DTO.SensorDetail, SensorExtendedDetail>().ReverseMap()

@@ -34,15 +34,14 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>Gateway Details</returns>
         Task<GatewayDTO> GatewayGet(long GatewayID);
 
+
         /// <summary>
         /// Assigns gateway to the specified network
         /// </summary>
         /// <param name="GatewayID">Identifier of gateway to move</param>
         /// <param name="NetworkID">Identifier of network on your account</param>
-        /// <param name="CheckDigit">Check digit to prevent unauthorized movement of gateways</param>
         /// <returns>Success/Failure</returns>
-        Task<string> AssignGateway(long GatewayID, long NetworkID, string CheckDigit);
-
+        Task<string> AssignGateway(long GatewayID, long NetworkID);
 
         /// <summary>
         /// Removes the gateway object from the network.

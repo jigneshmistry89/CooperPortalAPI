@@ -17,6 +17,8 @@ namespace Coopers.BusinessLayer.Model.DTO
     {
         public long PaymentHistoryID { get; set; }
 
+        public string StripeChargeID { get; set; }
+
         public Transaction Transaction { get; set; }
 
     }

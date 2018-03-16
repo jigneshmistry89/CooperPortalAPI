@@ -124,6 +124,7 @@ namespace Coopers.BusinessLayer.Services.Services
             var notTransactionInfo = JsonConvert.DeserializeObject<NotifEyeTransactionInfo>(paymentHistory.Data);
             var retVal = _mapper.Map<PaymentHistoryInfo>(notTransactionInfo);
             retVal.ID = paymentHistory.ID;
+            retVal.StripeChargeID = paymentHistory.StripeChargeID;
             retVal.ProductName = paymentHistory.ProductName;
             retVal.HistoryDate = paymentHistory.HistoryDate.ToString("yyyy-MM-dd");
             retVal.InvoiceDownloadLink = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + "/api/payment/Invoice?PaymentHistoryID=" + paymentHistory.ID;

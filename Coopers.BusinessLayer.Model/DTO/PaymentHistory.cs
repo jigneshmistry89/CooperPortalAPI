@@ -24,6 +24,8 @@ namespace Coopers.BusinessLayer.Model.DTO
     {
         public long ID { get; set; }
 
+        public string StripeChargeID { get; set; }
+
         public string Type { get; set; }
 
         public string ProductName { get; set; }

@@ -83,14 +83,13 @@ namespace Coopers.BusinessLayer.Services.Services
             UserLocationSummary userLocaSummary = null;
             foreach (var network in networks)
             {
-               
+
                 //Get the address detais for the network
                 var netWorkLocation = await _networkLocationClient.GetNetworkLocationByID(network.NetworkID);
                 
                 if (netWorkLocation != null)
                 {
                     userLocaSummary = _mapper.Map<UserLocationSummary>(netWorkLocation);
-
                     //prepare the sensor summary from the network
                     var sensorSummary = await PreareSensorSummaryForNetwork(network.NetworkID);
                     if (sensorSummary != null)
@@ -101,10 +100,13 @@ namespace Coopers.BusinessLayer.Services.Services
                         userLocaSummary.Alerts = sensorSummary.Alerts;
                         userLocaSummary.ActiveSensors = sensorSummary.ActiveSensors;
                     }
-
-                    userLocSummaryList.Add(userLocaSummary);
-
                 }
+                else
+                {
+                    userLocaSummary = _mapper.Map<UserLocationSummary>(network);
+                }
+
+                userLocSummaryList.Add(userLocaSummary);
             }
 
             return userLocSummaryList;

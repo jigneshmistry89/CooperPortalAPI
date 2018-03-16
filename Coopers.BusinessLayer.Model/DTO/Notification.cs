@@ -47,6 +47,8 @@ namespace Coopers.BusinessLayer.Model.DTO
 
     public class NotitifcationWithSchedules
     {
+        public long NotificationID { get; set; }
+
         public string Text { get; set; }
 
         public string Name { get; set; }
@@ -73,28 +75,34 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public string StartTime { get; set; }
 
-
         public string EndTime { get; set; }
 
-        public Schedule Schedule { get; set; }
+        public List<Schedule> Schedule { get; set; }
 
+        public List<long> GatewayList { get; set; }
+
+        public List<long> SensorList { get; set; }
+
+        public List<UserNotification> UserList { get; set; }
+
+    }
+
+    public class UserNotification
+    {
+        public long UserID { get; set; }
+
+        public int NotificationType { get; set; }
     }
 
     public class Schedule
     {
-        public string SundayDayOfWeek { get; set; }
+        public string DayOfWeek { get; set; }
 
-        public string MondayDayOfWeek { get; set; }
+        public string ScheduleDay { get; set; }
 
-        public string TuesdayDayOfWeek { get; set; }
+        public string FirstTime { get; set; }
 
-        public string WednesdayDayOfWeek { get; set; }
-
-        public string ThursdayDayOfWeek { get; set; }
-
-        public string FridayDayOfWeek { get; set; }
-
-        public string SaturdayDayOfWeek { get; set; }
+        public string SecondTime { get; set; }
 
     }
 

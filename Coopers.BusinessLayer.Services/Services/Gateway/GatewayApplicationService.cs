@@ -50,8 +50,7 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>Success/Failure</returns>
         public async Task<string> AssignGateway(long GatewayID, long NetworkID)
         {
-            var CheckDigit = CheckDigitGenerator.GenerateSecurityCode(GatewayID.ToString());
-            return await _gatewayClient.AssignGateway(GatewayID, NetworkID, CheckDigit);
+            return await _gatewayClient.AssignGateway(GatewayID, NetworkID);
         }
 
         /// <summary>
