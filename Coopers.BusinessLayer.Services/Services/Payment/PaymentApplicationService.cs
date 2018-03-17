@@ -91,16 +91,7 @@ namespace Coopers.BusinessLayer.Services.Services
 
                         if (retVal>0)
                         {
-                            var user = await _iHttpContextProvider.GetCurrentUser();
-
-                            //Get the template
-                            var template = File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Data/Payment Confirmation Email.html"));
-
-                            //Replace the link.
-                            template = template.Replace("{%PaymentReferenceNo%}", charge.Id);
-                            template = template.Replace("{%UserName%}", user.UserFullName);
-                            _emailApplicationService.SendAnEmail(template, user.Email, AppLocalizer.SubscriptionRenewed);
-
+                            await PrepareAndSendPaymentSuccessfulEmail(charge.Id);
 
                             return new PaymentInfo
                             {
@@ -270,6 +261,36 @@ namespace Coopers.BusinessLayer.Services.Services
             template = template.Replace("{%NoOfSensors%}", transInfo.NumberOfSensor.ToString());
             template = template.Replace("{%Amount%}", transInfo.TotalAmount.ToString());
             return template;
+        }
+
+        /// <summary>
+        /// Prepare and sens the payment successful method.
+        /// </summary>
+        /// <param name="ChargeID">Stripe charge ID</param>
+        private async Task<bool> PrepareAndSendPaymentSuccessfulEmail(string ChargeID)
+        {
+            var retVal = false;
+            try
+            {
+                var user = await _iHttpContextProvider.GetCurrentUser();
+
+                if (!string.IsNullOrEmpty(user.Email))
+                {
+                    //Get the template
+                    var template = File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Data/Payment Confirmation Email.html"));
+
+                    //Replace the link.
+                    template = template.Replace("{%PaymentReferenceNo%}", ChargeID);
+                    template = template.Replace("{%UserName%}", user.UserFullName);
+                    _emailApplicationService.SendAnEmail(template, user.Email, AppLocalizer.SubscriptionRenewed);
+                    retVal = true;
+                }
+            }
+            catch (Exception)
+            {
+                //Do Nothing..
+            }
+            return retVal;
         }
 
         #endregion
