@@ -96,9 +96,9 @@ namespace Coopers.BusinessLayer.Model.DTO
 
     public class Schedule
     {
-        public string DayOfWeek { get; set; }
+        public int DayOfWeek { get; set; }
 
-        public string ScheduleDay { get; set; }
+        public int ScheduleDay { get; set; }
 
         public string FirstTime { get; set; }
 

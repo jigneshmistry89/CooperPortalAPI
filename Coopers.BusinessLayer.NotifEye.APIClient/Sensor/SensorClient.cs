@@ -128,24 +128,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             return await _httpService.GetAsAsync<List<DataMessages>>("SensorRecentDataMessages", string.Format("SensorID={0}&Minutes={1}", SensorID, Minutes), false, false);
         }
 
-        /// <summary>
-        /// Assigns sensor to the specified network
-        /// </summary>
-        /// <param name="SensorID">Identifier of sensor to move</param>
-        /// <param name="NetworkID">Identifier of network on your account</param>
-        /// <param name="CheckDigit">Check digit to prevent unauthorized movement of sensors</param>
-        /// <returns>true/false</returns>
-        public async Task<string> AssignSensor(long SensorID, long NetworkID, string CheckDigit)
-        {
-            var res =  await _httpService.GetAsAsync<string>("AssignSensor", string.Format("SensorID={0}&NetworkID={1}&CheckDigit={2}", SensorID, NetworkID, CheckDigit), false, false);
-
-            if (res != "Success")
-            {
-                throw new System.Exception(res);
-            }
-
-            return res;
-        }
+       
 
         /// <summary>
         /// Removes the sensor object from the network.
@@ -231,6 +214,46 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
 
 
         #region INTEGRATED API
+
+        /// <summary>
+        /// Create a Sensor
+        /// </summary>
+        /// <param name="CreateSensor">Create sensor model</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> CreateSensor(Model.DTO.CreateSensor Sensor)
+        {
+            var res = await _httpService.PostAsAsync<string>("sensor/CreateSensor", Sensor, false);
+
+            if (res != "Success")
+            {
+                throw new System.Exception(res);
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Assigns sensor to the specified network
+        /// </summary>
+        /// <param name="SensorID">Identifier of sensor to move</param>
+        /// <param name="NetworkID">Identifier of network on your account</param>
+        /// <param name="CheckDigit">Check digit to prevent unauthorized movement of sensors</param>
+        /// <returns>true/false</returns>
+        public async Task<string> AssignSensor(long SensorID, long NetworkID, string CheckDigit)
+        {
+            //Create the URI
+            var method = string.Format("sensor/assignsensor?sensorid={0}&NetworkID={1}&sensorCode={2}", SensorID, NetworkID, CheckDigit);
+
+            //Make the call
+            var res = await _httpService.PostAsAsync<string>(method, null, false);
+
+            if (res != "Success")
+            {
+                throw new System.Exception(res);
+            }
+
+            return res;
+        }
 
         #endregion
 

@@ -82,6 +82,9 @@ namespace Coopers.BusinessLayer.API
                     x.CreateMap<LocationDetails, NetworkLocation>().ReverseMap()
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));
+                    x.CreateMap<LocationDetails, Model.DTO.Network>().ReverseMap()
+                                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
+                                .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));
                     x.CreateMap<UserLocationSummary, NetworkLocation>().ReverseMap()
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));
@@ -90,6 +93,10 @@ namespace Coopers.BusinessLayer.API
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.NetworkID))
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.NetworkName));
                     x.CreateMap<CreateNetwork, NetworkLocation>().ReverseMap();
+                    x.CreateMap<NetworkLocation,UpdateNetwork>().ReverseMap()
+                                .ForMember(dest => dest.CSNetID, opt => opt.MapFrom(src => src.NetworkID));
+                    x.CreateMap<Model.DTO.Network, UpdateNetwork>().ReverseMap()
+                                .ForMember(dest => dest.CSNetID, opt => opt.MapFrom(src => src.NetworkID));
                     x.CreateMap<Model.DTO.SensorDetail, NotifEye.APIClient.DTO.SensorDetail>().ReverseMap();
                     x.CreateMap<Model.DTO.SensorDetail, SensorExtendedDetail>().ReverseMap()
                                 .ForMember(dest => dest.SensorType, opt => opt.MapFrom(src => src.MonnitApplicationID));

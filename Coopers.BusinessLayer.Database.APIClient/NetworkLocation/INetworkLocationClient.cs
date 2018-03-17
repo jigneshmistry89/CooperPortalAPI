@@ -20,5 +20,12 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <param name="NetworkLocation">NetworkLocation model</param>
         /// <returns>Id of the created Networklocation</returns>
         Task<long> CreateNetworkLocation(NetworkLocation NetworkLocation);
+
+        /// <summary>
+        /// Update a NewtworkLocation in Db
+        /// </summary>
+        /// <param name="NetworkLocation">NetworkLocation model</param>
+        /// <returns>No of records updated</returns>
+        Task<int> UpdateNetworkLocation(NetworkLocation NetworkLocation);
     }
 }

@@ -533,5 +533,12 @@
             <param name="NetworkLocation">Networklocation model</param>
             <returns>Id of the newly created NetworkLocation</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.Database.API.Controllers.NetworkLocationController.UpdateNetworkLocation(Coopers.BusinessLayer.Database.Domain.Models.NetworkLocation)">
+            <summary>
+            Update a networklocation record
+            </summary>
+            <param name="NetworkLocation">Networklocation model</param>
+            <returns>No of records Update</returns>
+        </member>
     </members>
 </doc>

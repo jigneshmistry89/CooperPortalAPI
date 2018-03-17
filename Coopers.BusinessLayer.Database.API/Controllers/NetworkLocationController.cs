@@ -65,6 +65,23 @@ namespace Coopers.BusinessLayer.Database.API.Controllers
 
         #endregion
 
+        #region PUT | APIs
+
+        /// <summary>
+        /// Update a networklocation record
+        /// </summary>
+        /// <param name="NetworkLocation">Networklocation model</param>
+        /// <returns>No of records Update</returns>
+        [HttpPut]
+        [Route("")]
+        [ResponseType(typeof(int))]
+        public async Task<IHttpActionResult> UpdateNetworkLocation([FromBody]NetworkLocation NetworkLocation)
+        {
+            return Ok(await _networkLocationRepository.UpdateNetworkLocation(NetworkLocation));
+        }
+
+        #endregion
+
         #endregion
 
 

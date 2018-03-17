@@ -628,6 +628,13 @@
             </summary>
             <returns>returns the network list</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.NetworkController.UpdateNetwork(Coopers.BusinessLayer.Services.DTO.UpdateNetwork)">
+            <summary>
+            Update the Network and the NetworkLocation record
+            </summary>
+            <param name="Network">Network info to update</param>
+            <returns>No of records</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.NetworkController.CreateNetwork(Coopers.BusinessLayer.Services.DTO.CreateNetwork)">
             <summary>
             Adds new wireless sensor network to account
@@ -864,6 +871,13 @@
             </summary>
             <param name="SensorBulkAssign">Sensor Bulk Assign Model</param>
             <returns>Success if Sensor assigned successfully</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensor(Coopers.BusinessLayer.Model.DTO.CreateSensor)">
+            <summary>
+            Create a Sensor
+            </summary>
+            <param name="CreateSensor">Create sensor model</param>
+            <returns>Success/Failure</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.RemoveSensor(System.Int64)">
             <summary>

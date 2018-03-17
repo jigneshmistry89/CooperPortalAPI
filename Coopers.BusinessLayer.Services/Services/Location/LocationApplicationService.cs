@@ -119,20 +119,35 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>LocationDetailsDTO</returns>
         public async Task<LocationDetails> GetLocationDetails(int ID)
         {
-            //Get the address detais for the network
-            var netWorkLocation = await _networkLocationClient.GetNetworkLocationByID(ID);
+            LocationDetails locDetails = new LocationDetails();
 
-            var locDetails = _mapper.Map<LocationDetails>(netWorkLocation);
+            //Get the Network info from the Integrated API
+            var netWork = await  _networkClient.GetNetworkByID(ID);
+            
+            //If the newtwork found then 
+            if (netWork != null)
+            {
+                //Map the network info.
+                locDetails = _mapper.Map<LocationDetails>(netWork);
 
-            //get gayway list for a network
-            var gateWayList = await _gatewayClient.GetGatewayListByNetworkID(locDetails.ID);
-            locDetails.Gateways = _mapper.Map<List<GatewayDetails>>(gateWayList);
-            locDetails.NoOfGateways = locDetails.Gateways.Count;
+                //Get the address detais for the network
+                var netWorkLocation = await _networkLocationClient.GetNetworkLocationByID(ID);
+                
+                if (netWorkLocation != null)
+                {
+                    locDetails = _mapper.Map<LocationDetails>(netWorkLocation);
+                }
 
-            //get the sensor list for a given network
-            var sensorList = await _sensorClient.GetSensorListByNetworkID(locDetails.ID);
-            locDetails.Sensors = _mapper.Map<List<SensorDetails>>(sensorList);
-            locDetails.NoOfSensors = locDetails.Sensors.Count;
+                //get gayway list for a network
+                var gateWayList = await _gatewayClient.GetGatewayListByNetworkID(netWork.CSNetID);
+                locDetails.Gateways = _mapper.Map<List<GatewayDetails>>(gateWayList);
+                locDetails.NoOfGateways = locDetails.Gateways.Count;
+
+                //get the sensor list for a given network
+                var sensorList = await _sensorClient.GetSensorListByNetworkID(netWork.CSNetID);
+                locDetails.Sensors = _mapper.Map<List<SensorDetails>>(sensorList);
+                locDetails.NoOfSensors = locDetails.Sensors.Count;
+            }
 
             return locDetails;
         }

@@ -2,6 +2,7 @@
 using Coopers.BusinessLayer.NotifEye.APIClient.HttpService;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Coopers.BusinessLayer.NotifEye.APIClient
 {
@@ -75,6 +76,34 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         public async Task<List<Model.DTO.Network>> GetNetworkListByAccountID(long AccountID)
         {
             return await _httpService.GetAsAsync<List<Model.DTO.Network>>("csnet/GetNetworkListByAccountID", string.Format("AccountID={0}", AccountID), true, false);
+        }
+
+        /// <summary>
+        /// Get the network record by ID
+        /// </summary>
+        /// <param name="NetworkID">unique idetifier for the Network</param>
+        /// <returns>Network model</returns>
+        public async Task<Model.DTO.Network> GetNetworkByID(long NetworkID)
+        {
+            var netWork = await _httpService.GetAsAsync<List<Model.DTO.Network>>("csnet/GetNetworkByID", string.Format("NetworkID={0}", NetworkID), true, false);
+
+            if(netWork != null && netWork.Count > 0)
+            {
+                return netWork[0];
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Update the Network record
+        /// </summary>
+        /// <param name="Network">Network info to update</param>
+        /// <returns>No of records updated</returns>
+        public async Task<int> UpdateNetwork(Model.DTO.Network Network)
+        {
+            string methodName = string.Format("csnet/UpdateGateway?NetworkID={0}&Name={1}&SendNotification={2}", Network.CSNetID, Network.Name, Network.SendNotifications);
+            return await _httpService.PutAsAsync<int>(methodName, null);
         }
 
         #endregion

@@ -29,5 +29,13 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <param name="Name">Unique identifier of the network</param>
         /// <returns>Success/Failure</returns>
         Task<object> DeleteNetwork(long NetworkID);
+
+        /// <summary>
+        /// Update the Network and the NetworkLocation record
+        /// </summary>
+        /// <param name="Network">Network info to update</param>
+        /// <returns>No of records</returns>
+        Task<int> UpdateNetwork(UpdateNetwork Network);
+
     }
 }

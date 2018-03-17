@@ -47,6 +47,13 @@ namespace Coopers.BusinessLayer.Services.Services
         Task<string> AssignSensor(long SensorID, long NetworkID);
 
         /// <summary>
+        /// Create a Sensor
+        /// </summary>
+        /// <param name="CreateSensor">Create sensor model</param>
+        /// <returns>Success/Failure</returns>
+        Task<string> CreateSensor(Model.DTO.CreateSensor Sensor);
+
+        /// <summary>
         /// Assign the sensors to the given network
         /// </summary>
         /// <param name="SensorBulkAssing">Sensor bulk Assing model</param>

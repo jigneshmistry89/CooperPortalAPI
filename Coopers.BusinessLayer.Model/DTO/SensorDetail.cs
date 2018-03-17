@@ -105,4 +105,20 @@ namespace Coopers.BusinessLayer.Model.DTO
         public string Value { get; set; }
     }
 
+    public class CreateSensor
+    {
+        public long SensorID { get; set; }
+
+        public long NetworkID { get; set; }
+
+        public long AccountID { get; set; }
+
+        public int MonnitApplicationID { get; set; }
+
+        public string Name { get; set; }
+
+        public string SensorCode { get; set; }
+
+    }
+
 }

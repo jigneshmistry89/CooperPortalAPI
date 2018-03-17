@@ -53,6 +53,24 @@ namespace Coopers.BusinessLayer.API.Controllers
 
         #endregion
 
+        #region PUT | APIs
+
+        /// <summary>
+        /// Update the Network and the NetworkLocation record
+        /// </summary>
+        /// <param name="Network">Network info to update</param>
+        /// <returns>No of records</returns>
+        [HttpPut]
+        [Route("")]
+        public async Task<IHttpActionResult> UpdateNetwork([FromBody]UpdateNetwork Network)
+        {
+            return Ok(await _networkApplicationService.UpdateNetwork(Network));
+        }
+
+
+        #endregion
+
+
         #region POST | APIs
 
         /// <summary>
@@ -86,6 +104,7 @@ namespace Coopers.BusinessLayer.API.Controllers
         }
 
         #endregion
+
 
         #endregion
 

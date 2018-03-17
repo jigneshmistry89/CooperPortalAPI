@@ -158,6 +158,24 @@ namespace Coopers.BusinessLayer.API.Controllers
 
         #endregion
 
+        #region POST | APIs
+
+        /// <summary>
+        /// Create a Sensor
+        /// </summary>
+        /// <param name="CreateSensor">Create sensor model</param>
+        /// <returns>Success/Failure</returns>
+        [HttpPost]
+        [Route("")]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> CreateSensor(Model.DTO.CreateSensor CreateSensor)
+        {
+            return Ok(await _sensorApplicationService.CreateSensor(CreateSensor));
+        }
+
+
+        #endregion
+
         #region DELETE | APIs
 
         /// <summary>

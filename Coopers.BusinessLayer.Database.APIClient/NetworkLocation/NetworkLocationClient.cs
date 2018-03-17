@@ -52,6 +52,23 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
             return await Task.FromResult(res);
         }
 
+
+        /// <summary>
+        /// Update a NewtworkLocation in Db
+        /// </summary>
+        /// <param name="NetworkLocation">NetworkLocation model</param>
+        /// <returns>No of records updated</returns>
+        public async Task<int> UpdateNetworkLocation(NetworkLocation NetworkLocation)
+        {
+            int res = 0;
+            HttpResponseMessage response = await new HttpClient().PutAsJsonAsync(NetowrkLocationEndPoint, NetworkLocation);
+            if (response.IsSuccessStatusCode)
+            {
+                res = (await response.Content.ReadAsAsync<int>());
+            }
+            return await Task.FromResult(res);
+        }
+
         #endregion
 
     }

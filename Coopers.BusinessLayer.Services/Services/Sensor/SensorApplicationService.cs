@@ -126,7 +126,18 @@ namespace Coopers.BusinessLayer.Services.Services
             var CheckDigit = CheckDigitGenerator.GenerateSecurityCode(SensorID.ToString());
             return await _sensorClient.AssignSensor(SensorID, NetworkID, CheckDigit);
         }
-        
+
+        /// <summary>
+        /// Create a Sensor
+        /// </summary>
+        /// <param name="CreateSensor">Create sensor model</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> CreateSensor(Model.DTO.CreateSensor Sensor)
+        {
+            Sensor.SensorCode = CheckDigitGenerator.GenerateSecurityCode(Sensor.SensorID.ToString());
+            return await _sensorClient.CreateSensor(Sensor);
+        }
+
         /// <summary>
         /// Assign the sensors to the given network
         /// </summary>

@@ -14,6 +14,13 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         Task<List<Network>> GetNetworkList();
 
         /// <summary>
+        /// Get the network record by ID
+        /// </summary>
+        /// <param name="NetworkID">unique idetifier for the Network</param>
+        /// <returns>Network model</returns>
+        Task<Model.DTO.Network> GetNetworkByID(long NetworkID);
+
+        /// <summary>
         /// Get the newtowrks for a given account
         /// </summary>
         /// <param name="AccountID">Unique identifier for the account</param>
@@ -34,5 +41,11 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>Success/Failure</returns>
         Task<object> DeleteNetwork(long NetworkID);
 
+        /// <summary>
+        /// Update the Network record
+        /// </summary>
+        /// <param name="Network">Network info to update</param>
+        /// <returns>No of records updated</returns>
+        Task<int> UpdateNetwork(Model.DTO.Network Network);
     }
 }

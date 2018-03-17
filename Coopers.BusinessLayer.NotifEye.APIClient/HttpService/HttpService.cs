@@ -87,7 +87,14 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
             var response = await httpClient.PostAsync(path, new StringContent(JsonConvert.SerializeObject(Body),Encoding.UTF8,"application/json"));
             if (response.IsSuccessStatusCode)
             {
-                return (await response.Content.ReadAsAsync<T>());
+                try
+                {
+                    return (await response.Content.ReadAsAsync<T>());
+                }
+                catch (Exception)
+                {
+                    throw new Exception(await response.Content.ReadAsStringAsync());
+                }
             }
             else
             {
@@ -123,7 +130,14 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
             var response = await httpClient.PutAsync(path, new StringContent(JsonConvert.SerializeObject(Body),Encoding.UTF8,"application/json"));
             if (response.IsSuccessStatusCode)
             {
-                return (await response.Content.ReadAsAsync<T>());
+                try
+                {
+                    return (await response.Content.ReadAsAsync<T>());
+                }
+                catch (Exception)
+                {
+                    throw new Exception(await response.Content.ReadAsStringAsync());
+                }
             }
             else
             {
@@ -179,7 +193,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(await response.Content.ReadAsStringAsync());
+                    throw PrepareHttpException(response, Method);
                 }
             }
             else

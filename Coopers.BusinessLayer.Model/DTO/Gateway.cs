@@ -21,15 +21,15 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public string MacAddress { get; set; }
 
-        public string RadioBand { get; set; }
+        //public string RadioBand { get; set; }
 
-        public string APNFirmwareVersion { get; set; }
+        //public string APNFirmwareVersion { get; set; }
 
-        public string GatewayFirmwareVersion { get; set; }
+        //public string GatewayFirmwareVersion { get; set; }
 
-        public int PowerSourceID { get; set; }
+        //public int PowerSourceID { get; set; }
 
-        public int CustomerID { get; set; }
+        //public int CustomerID { get; set; }
     }
 
     public class UpdateGateway
@@ -42,19 +42,7 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public string GatewayType { get; set; }
-
-        [Required]
-        public long SerialNumber { get; set; }
-
-        [Required]
-        public string MacAddress { get; set; }
-
-        [Required]
-        public int HeartBeat { get; set; }
-
+       
     }
 
     public class GatewayBulkAssign

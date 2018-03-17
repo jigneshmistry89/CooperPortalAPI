@@ -78,6 +78,30 @@ namespace Coopers.BusinessLayer.Services.Services
             return await _networkClient.DeleteNetwork(NetworkID);
         }
 
+        /// <summary>
+        /// Update the Network and the NetworkLocation record
+        /// </summary>
+        /// <param name="Network">Network info to update</param>
+        /// <returns>No of records</returns>
+        public async Task<int> UpdateNetwork(UpdateNetwork Network)
+        {
+            //prepare the networklocation model.
+            var network = _mapper.Map<Model.DTO.Network>(Network);
+
+            //Update the Network 
+            var result = await _networkClient.UpdateNetwork(network);
+
+            if (result> 0)
+            {
+                //prepare the networklocation model.
+                var netLocation = _mapper.Map<NetworkLocation>(Network);
+
+                //create a Networklocation in DB
+                result  = await _networkLocationClient.UpdateNetworkLocation(netLocation);
+            }
+
+            return result;
+        }
 
         #endregion
 

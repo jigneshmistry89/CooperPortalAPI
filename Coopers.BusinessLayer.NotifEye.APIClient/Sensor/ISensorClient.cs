@@ -106,5 +106,12 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="SensorID">Unique identifier of the sensor</param>
         /// <returns>List of sensor Attributes</returns>
         Task<List<Model.DTO.SensorAttribute>> SensorAttributes(long SensorID);
+
+        /// <summary>
+        /// Create a Sensor
+        /// </summary>
+        /// <param name="CreateSensor">Create sensor model</param>
+        /// <returns>Success/Failure</returns>
+        Task<string> CreateSensor(Model.DTO.CreateSensor Sensor);
     }
 }

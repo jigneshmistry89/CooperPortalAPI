@@ -28,7 +28,7 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public DateTime LastDateSent { get; set; }
 
-        public long Threshold { get; set; }
+        public double Threshold { get; set; }
 
         public string Comparer { get; set; }
 
