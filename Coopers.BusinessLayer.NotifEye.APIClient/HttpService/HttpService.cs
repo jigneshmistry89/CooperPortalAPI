@@ -72,6 +72,35 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
                 return await GetAsync<T>(Method, queryParam, IsAnonymous);
             }
         }
+        
+        public async Task<T> GetAsAsyncWithRegistrationToken<T>(string Method, string queryParam,string Token)
+        {
+
+            var httpClient = new HttpClient();
+
+            httpClient.DefaultRequestHeaders.Add("authenticatedtoken", Token);
+
+            string path = string.Format("{0}{1}?{2}", ConfigurationManager.AppSettings["NotifEyeIntegratedAPIEndpoint"], Method, queryParam);
+
+            HttpResponseMessage response = await httpClient.GetAsync(path);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    return (await response.Content.ReadAsAsync<T>());
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(await response.Content.ReadAsStringAsync());
+                }
+            }
+            else
+            {
+                throw PrepareHttpException(response, Method);
+            }
+        }
+
 
         public async Task<T> PostAsAsync<T>(string Method, object Body, bool IsAnonymous = false)
         {

@@ -11,6 +11,8 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>User Model</returns>
         Task<UserWithAccountInfo> GetUserInfo();
 
+        Task<UserWithAccountInfo> GetUserInfoWithRegistrationToken(string Token);
+
         /// <summary>
         /// Get the User info for the given userID
         /// </summary>

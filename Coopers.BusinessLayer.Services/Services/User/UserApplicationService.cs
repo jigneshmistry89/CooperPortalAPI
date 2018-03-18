@@ -7,6 +7,8 @@ using System.Configuration;
 using System.IO;
 using System.Web;
 using System;
+using AutoMapper;
+using Coopers.BusinessLayer.Database.APIClient.Location;
 
 namespace Coopers.BusinessLayer.Services.Services
 {
@@ -20,19 +22,23 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly IPaymentHistoryApplicationService _paymentHistoryApplicationService;
         private readonly IAccountApplicationService _accountApplicationService;
         private readonly INetworkApplicationService _networkApplicationService;
-        
+        private readonly IMapper _mapper;
+        private readonly IAccountLocationClient _accountLocationClient;
+
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public UserApplicationService(INetworkApplicationService networkApplicationService,IAccountApplicationService accountApplicationService,IUserClient userClient,IEmailApplicationService emailApplicationService, IPaymentHistoryApplicationService paymentHistoryApplicationService)
+        public UserApplicationService(IAccountLocationClient accountLocationClient,IMapper mapper,INetworkApplicationService networkApplicationService,IAccountApplicationService accountApplicationService,IUserClient userClient,IEmailApplicationService emailApplicationService, IPaymentHistoryApplicationService paymentHistoryApplicationService)
         {
             _userClient = userClient;
             _emailApplicationService = emailApplicationService;
             _paymentHistoryApplicationService = paymentHistoryApplicationService;
             _accountApplicationService = accountApplicationService;
             _networkApplicationService = networkApplicationService;
+            _mapper = mapper;
+            _accountLocationClient = accountLocationClient;
         }
 
         #endregion
@@ -130,7 +136,19 @@ namespace Coopers.BusinessLayer.Services.Services
                 User.Account.SubscriptionExpirationdate = DateTime.Now.AddDays(365).ToString("yyyy-MM-dd");
             }
           
-            return await _userClient.RegisterNewUser(User);
+            //Create the User and get the token
+            var registrationToken = await _userClient.RegisterNewUser(User);
+
+            //Get the User Info using the received token 
+            var user = await _userClient.GetUserInfoWithRegistrationToken(registrationToken);
+
+            if (user.Account != null && user.Account.Count > 0  )
+            {
+                await CreateAccountLocation(registrationToken, user.Account[0], User.Account.Latitude, User.Account.Longitude);
+            }
+
+            //Retrun the token
+            return registrationToken;
         }
 
         /// <summary>
@@ -140,7 +158,18 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>Authentication Token</returns>
         public async Task<string> RegisterNotifEyeUser(UserNotifEyeRegistration User)
         {
+            //RegisterUser and get the get the Token
             return await _userClient.RegisterNotifEyeUser(User);
+
+            //Get the User Info using the received token 
+            //var user = await _userClient.GetUserInfoWithRegistrationToken(registrationToken);
+
+            //if (user.Account != null && user.Account.Count > 0)
+            //{
+            //    await CreateAccountLocation(registrationToken, user.Account[0], User.Latitude, User.Longitude);
+            //}
+
+            //return registrationToken;
         }
 
         /// <summary>
@@ -179,6 +208,21 @@ namespace Coopers.BusinessLayer.Services.Services
 
 
         #region PRIVATE MEMBERS     
+
+        private async Task<long> CreateAccountLocation(string registrationToken,AccountInfo Account,double Latitude,double Longitude)
+        {
+
+            //Create the AccountLocation model. 
+            var AccountLocation = _mapper.Map<AccountLocation>(Account);
+
+            AccountLocation.IsActive = true;
+            AccountLocation.Longitude = Longitude;
+            AccountLocation.Latitude = Latitude;
+
+            //Save the AccountLocation Record in DB
+            return await _accountLocationClient.CreateAccountLocation(AccountLocation);
+
+        }
 
         #endregion
 

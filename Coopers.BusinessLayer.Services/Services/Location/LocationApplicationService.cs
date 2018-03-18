@@ -55,17 +55,31 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>LocationSummaryDTO</returns>
         public async Task<LocationSummary> GetLocationSummaryByID(long ID)
         {
-            //get location info
-            var loc = (await _locationClient.GetLocationByID(ID));
+
+            var netWorkLocation = await _networkLocationClient.GetNetworkLocationByID(ID);
 
             //map the location info 
-            LocationSummary locaSummary = _mapper.Map<LocationSummary>(loc);
-
+            LocationSummary locaSummary = _mapper.Map<LocationSummary>(netWorkLocation);
+            locaSummary.ID = netWorkLocation.CSNetID;
             //get sensor summary info
-            locaSummary.SensorSummary = await PrepareLocationSummary(loc);
+            locaSummary.SensorSummary = new List<SensorSummary>();
 
-            //prepare and return location summary
+            locaSummary.SensorSummary.Add(await PreareSensorSummaryForNetwork(netWorkLocation.CSNetID));
+
             return locaSummary;
+
+
+            ////get location info
+            //var loc = (await _locationClient.GetLocationByID(ID));
+
+            ////map the location info 
+            //LocationSummary locaSummary = _mapper.Map<LocationSummary>(loc);
+
+            ////get sensor summary info
+            //locaSummary.SensorSummary = await PrepareLocationSummary(loc);
+
+            ////prepare and return location summary
+            //return locaSummary;
 
         }
 

@@ -53,6 +53,10 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public int NumberOfGateways { get; set; }
 
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
+
     }
 
 }

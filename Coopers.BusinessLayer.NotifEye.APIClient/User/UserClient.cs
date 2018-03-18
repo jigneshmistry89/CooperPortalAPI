@@ -49,6 +49,16 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             return null;
         }
 
+        public async Task<UserWithAccountInfo> GetUserInfoWithRegistrationToken(string Token)
+        {
+            var retVal = await _httpService.GetAsAsyncWithRegistrationToken<UserDetail>("User/GetUserInfo", "", Token);
+            if (retVal != null && retVal.User != null)
+            {
+                return retVal.User;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Get the User info for the given userID
         /// </summary>

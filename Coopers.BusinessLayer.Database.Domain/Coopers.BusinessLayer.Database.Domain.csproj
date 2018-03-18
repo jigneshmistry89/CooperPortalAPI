@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CooperAtkinEntities.cs" />
+    <Compile Include="IRepositories\IAccountLocationRepository.cs" />
     <Compile Include="IRepositories\ITaxableStatesRepository.cs" />
     <Compile Include="IRepositories\IPaymentHistoryRepository.cs" />
     <Compile Include="IRepositories\INetworkLocationRepository.cs" />
@@ -93,9 +94,14 @@
     <Compile Include="Migrations\201803121131015_Added Column Latitude and Longitude to NetworkLocation.Designer.cs">
       <DependentUpon>201803121131015_Added Column Latitude and Longitude to NetworkLocation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803181720209_Added AccountLocationTable.cs" />
+    <Compile Include="Migrations\201803181720209_Added AccountLocationTable.Designer.cs">
+      <DependentUpon>201803181720209_Added AccountLocationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\AccountLocation.cs" />
     <Compile Include="Models\NetworkLocation.cs" />
     <Compile Include="Models\LocationNetwork.cs" />
     <Compile Include="Models\TaxableStates.cs" />
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803121131015_Added Column Latitude and Longitude to NetworkLocation.resx">
       <DependentUpon>201803121131015_Added Column Latitude and Longitude to NetworkLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803181720209_Added AccountLocationTable.resx">
+      <DependentUpon>201803181720209_Added AccountLocationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

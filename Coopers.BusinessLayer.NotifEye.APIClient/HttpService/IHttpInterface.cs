@@ -12,6 +12,8 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
 
         Task<T> GetAsAsync<T>(string Method, string queryParam, bool IsIntegrated, bool IsAnonymous = false);
 
+        Task<T> GetAsAsyncWithRegistrationToken<T>(string Method, string queryParam, string Token);
+
         Task<T> PostAsAsync<T>(string Method, object Body, bool IsAnonymous = false);
 
         Task<T> PostAsAsyncWithRegistrationToken<T>(string Method, object Body);

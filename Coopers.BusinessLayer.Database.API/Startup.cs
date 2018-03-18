@@ -28,6 +28,7 @@ namespace Coopers.BusinessLayer.Database.API
             builder.RegisterType(typeof(NetworkLocationRepository)).AsImplementedInterfaces();
             builder.RegisterType(typeof(PaymentHistoryRepository)).AsImplementedInterfaces();
             builder.RegisterType(typeof(TaxableStatesRepository)).AsImplementedInterfaces();
+            builder.RegisterType(typeof(AccountLocationRepository)).AsImplementedInterfaces();
 
             builder.RegisterType<CooperAtkinEntities>().As<DbContext>().InstancePerRequest();
             builder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerRequest();

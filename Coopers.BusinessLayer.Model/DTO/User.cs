@@ -130,11 +130,20 @@ namespace Coopers.BusinessLayer.Model.DTO
     public class UserNotifEyeRegistration
     {
         public string DashboardUserName { get; set; }
+
         public string DashboardPassword { get; set; }
+
         public string ProductName { get; set; }
+
         public string Email { get; set; }
+
         public string NotifeyeUserName { get; set; }
+
         public string NotifeyePassword { get; set; }
+
+        //public double Latitude { get; set; }
+
+        //public double Longitude { get; set; }
     }
 
     public class AccountRegistration
@@ -159,6 +168,10 @@ namespace Coopers.BusinessLayer.Model.DTO
         public int BusinessType { get; set; }
 
         public int TimeZone { get; set; }
+
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
 
         public string SubscriptionExpirationdate { get; set; }
 

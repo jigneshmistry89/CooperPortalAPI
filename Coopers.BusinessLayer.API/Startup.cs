@@ -58,6 +58,7 @@ namespace Coopers.BusinessLayer.API
             builder.RegisterType(typeof(HttpService)).As<IHttpService>();
             builder.RegisterType(typeof(PaymentHistoryClient)).As<IPaymentHistoryClient>();
             builder.RegisterType(typeof(TaxableStateClient)).As<ITaxableStateClient>();
+            builder.RegisterType(typeof(AccountLocationClient)).As<IAccountLocationClient>();
 
             builder.RegisterType(typeof(UserClient)).As<IUserClient>();
 
@@ -70,6 +71,7 @@ namespace Coopers.BusinessLayer.API
             {
                 var configure = new MapperConfiguration(x =>
                 {
+                    x.CreateMap<LocationSummary, NetworkLocation>().ReverseMap();
                     x.CreateMap<LocationSummary, LocationDTO>().ReverseMap();
                     x.CreateMap<LocationDetails, LocationDTO>().ReverseMap();
                     x.CreateMap<SensorDetails, NotifEye.APIClient.DTO.SensorDetail>().ReverseMap()
@@ -82,9 +84,13 @@ namespace Coopers.BusinessLayer.API
                     x.CreateMap<LocationDetails, NetworkLocation>().ReverseMap()
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));
+                    x.CreateMap<AccountLocation, UpdateAccount>().ReverseMap()
+                                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CompanyName));
                     x.CreateMap<LocationDetails, Model.DTO.Network>().ReverseMap()
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));
+                    x.CreateMap<AccountLocation, AccountInfo>().ReverseMap()
+                                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.CompanyName));
                     x.CreateMap<UserLocationSummary, NetworkLocation>().ReverseMap()
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.CSNetID));

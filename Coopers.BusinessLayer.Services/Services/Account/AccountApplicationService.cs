@@ -8,6 +8,7 @@ using Coopers.BusinessLayer.Localizer;
 using AutoMapper;
 using Coopers.BusinessLayer.Utility;
 using Coopers.BusinessLayer.Database.APIClient;
+using Coopers.BusinessLayer.Database.APIClient.Location;
 
 namespace Coopers.BusinessLayer.Services.Services
 {
@@ -24,13 +25,14 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly IGatewayClient _gatewayClient;
         private readonly IMapper _mapper;
         private readonly IPaymentHistoryApplicationService _paymentHistoryApplicationService;
+        private readonly IAccountLocationClient _accountLocationClient;
 
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public AccountApplicationService(IPaymentHistoryApplicationService paymentHistoryApplicationService,ITaxableStateClient taxableStateClient, IAccountClient accountClient, ISensorClient sensorClient, IGatewayClient gatewayClient, INetworkClient networkClient,IMapper mapper)
+        public AccountApplicationService(IAccountLocationClient accountLocationClient,IPaymentHistoryApplicationService paymentHistoryApplicationService,ITaxableStateClient taxableStateClient, IAccountClient accountClient, ISensorClient sensorClient, IGatewayClient gatewayClient, INetworkClient networkClient,IMapper mapper)
         {
             _sensorClient = sensorClient;
             _taxableStateClient = taxableStateClient;
@@ -39,6 +41,7 @@ namespace Coopers.BusinessLayer.Services.Services
             _gatewayClient = gatewayClient;
             _mapper = mapper;
             _paymentHistoryApplicationService = paymentHistoryApplicationService;
+            _accountLocationClient = accountLocationClient;
         }
 
         #endregion
@@ -182,6 +185,13 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>Updated record count</returns>
         public async Task<int> UpdateAccount(UpdateAccount Account)
         {
+            //Create AccountLocation Model
+            var AccountLocation = _mapper.Map<AccountLocation>(Account);
+
+            //Update the AccountLocation
+            var count = await _accountLocationClient.UpdateAccountLocation(AccountLocation);
+
+            //Update the Account using integrated API.
             return await _accountClient.UpdateAccount(Account);
         }
 
@@ -353,6 +363,13 @@ namespace Coopers.BusinessLayer.Services.Services
             {
                 var customer = _mapper.Map<Customer>(acc);
                 customer.Address += (string.IsNullOrEmpty(acc.Address2) ? "" : acc.Address2) + " " + acc.City + " " + acc.State + " " + acc.PostalCode;
+                var accountLocation = await _accountLocationClient.GetAccountLocationByID(acc.AccountID);
+                if(accountLocation!= null)
+                {
+                    customer.Latitude = accountLocation.Latitude;
+                    customer.Longitude = accountLocation.Longitude;
+                }
+                
                 customers.Add(customer);
                 var numSes = AccountNumSensors.Where(x => x.AccountID == acc.AccountID).FirstOrDefault();
 

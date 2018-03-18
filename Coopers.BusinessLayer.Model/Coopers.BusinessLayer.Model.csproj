@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AccountLocation.cs" />
     <Compile Include="DTO\NotificationInfo.cs" />
     <Compile Include="DTO\PaymentHistory.cs" />
     <Compile Include="DTO\Network.cs" />

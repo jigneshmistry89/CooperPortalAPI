@@ -17,6 +17,8 @@
 
         public virtual DbSet<TaxableStates> TaxableStates { get; set; }
 
+        public virtual DbSet<AccountLocation> AccountLocation { get; set; }
+
         public virtual DbSet<NetworkLocation> NetworkLocation { get; set; }
 
         public virtual DbSet<User> Users { get; set; }

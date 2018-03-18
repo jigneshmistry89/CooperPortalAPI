@@ -59,6 +59,8 @@
     <Compile Include="DTO\NetworkLocation.cs" />
     <Compile Include="Location\ILocationClient.cs" />
     <Compile Include="Location\LocationClient.cs" />
+    <Compile Include="AccountLocation\IAccountLocationClient.cs" />
+    <Compile Include="AccountLocation\AccountLocationClient.cs" />
     <Compile Include="NetworkLocation\INetworkLocationClient.cs" />
     <Compile Include="NetworkLocation\NetworkLocationClient.cs" />
     <Compile Include="TaxableState\ITaxableStateClient.cs" />
