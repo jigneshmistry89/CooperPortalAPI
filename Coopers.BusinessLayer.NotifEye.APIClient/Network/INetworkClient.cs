@@ -14,6 +14,13 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         Task<List<Network>> GetNetworkList();
 
         /// <summary>
+        /// Get the NetworkList for a User
+        /// </summary>
+        /// <param name="UserName">UserName</param>
+        /// <returns>List of Network</returns>
+        Task<List<Network>> GetNetworkListByUser(string UserName);
+
+        /// <summary>
         /// Get the network record by ID
         /// </summary>
         /// <param name="NetworkID">unique idetifier for the Network</param>

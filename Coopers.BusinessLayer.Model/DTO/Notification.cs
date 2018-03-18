@@ -67,15 +67,15 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public int MonnitApplicationID { get; set; }
 
-        public long GatewayID { get; set; }
+        //public long GatewayID { get; set; }
 
-        public long SensorID { get; set; }
+        //public long SensorID { get; set; }
 
         public float Snooze { get; set; }
 
-        public string StartTime { get; set; }
+        //public string StartTime { get; set; }
 
-        public string EndTime { get; set; }
+        //public string EndTime { get; set; }
 
         public List<Schedule> Schedule { get; set; }
 

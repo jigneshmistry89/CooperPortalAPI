@@ -48,6 +48,16 @@ namespace Coopers.BusinessLayer.Services.Services
 
 
         /// <summary>
+        /// Get the NetworkList for a User
+        /// </summary>
+        /// <param name="UserName">UserName</param>
+        /// <returns>List of Network</returns>
+        public async Task<List<Network>> GetNetworkListByUser(string UserName)
+        {
+            return await _networkClient.GetNetworkListByUser(UserName);
+        }
+
+        /// <summary>
         /// Adds new wireless sensor network to account
         /// </summary>
         /// <param name="Network">model of the newtork to be created</param>

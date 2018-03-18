@@ -836,6 +836,13 @@
             <param name="Name">String (optional)	Filters list to sensors with names containing this string. (case-insensitive)</param>
             <returns>Returns the list of sensors that belongs to user.</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.GetSecurityCode(System.Int64)">
+            <summary>
+            Get the SecurityCode for a given SesorID
+            </summary>
+            <param name="SensorID">Unique identfier for a sensor</param>
+            <returns>Security code</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensor(Coopers.BusinessLayer.Model.DTO.UpdateSensor)">
             <summary>
             Update the SensorName and the Heartbeat info
@@ -872,7 +879,7 @@
             <param name="SensorBulkAssign">Sensor Bulk Assign Model</param>
             <returns>Success if Sensor assigned successfully</returns>
         </member>
-        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensor(Coopers.BusinessLayer.Model.DTO.CreateSensor)">
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.CreateSensor(Coopers.BusinessLayer.Model.DTO.CreateSensor)">
             <summary>
             Create a Sensor
             </summary>

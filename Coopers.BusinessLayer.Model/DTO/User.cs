@@ -20,6 +20,8 @@ namespace Coopers.BusinessLayer.Model.DTO
         public UserWithAccountInfo User { get; set; }
         public List<PaymentHistoryInfo> PaymentHistories { get; set; }
         public List<UserInfo> Users { get; set; }
+        //public List<long> NetworkPermissions { get; set; }
+
     }
 
     public class UserWithAccountInfo

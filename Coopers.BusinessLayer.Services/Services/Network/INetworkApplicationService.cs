@@ -14,6 +14,12 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <returns>returns the network list</returns>
         Task<List<Network>> GetNetworkList();
 
+        /// <summary>
+        /// Get the NetworkList for a User
+        /// </summary>
+        /// <param name="UserName">UserName</param>
+        /// <returns>List of Network</returns>
+        Task<List<Network>> GetNetworkListByUser(string UserName);
 
         /// <summary>
         /// Adds new wireless sensor network to account

@@ -41,6 +41,16 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             return await _httpService.GetAsAsync<List<Network>>("NetworkList", "", false, false);
         }
 
+        /// <summary>
+        /// Get the NetworkList for a User
+        /// </summary>
+        /// <param name="UserName">UserName</param>
+        /// <returns>List of Network</returns>
+        public async Task<List<Network>> GetNetworkListByUser(string UserName)
+        {
+            return await _httpService.GetWithUserAsync<List<Network>>(UserName, "NetworkList", "", false, false);
+        }
+
 
         /// <summary>
         /// Adds new wireless sensor network to account
@@ -102,7 +112,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>No of records updated</returns>
         public async Task<int> UpdateNetwork(Model.DTO.Network Network)
         {
-            string methodName = string.Format("csnet/UpdateGateway?NetworkID={0}&Name={1}&SendNotification={2}", Network.CSNetID, Network.Name, Network.SendNotifications);
+            string methodName = string.Format("csnet/UpdateNetwork?NetworkID={0}&Name={1}&SendNotification={2}", Network.CSNetID, Network.Name, Network.SendNotifications);
             return await _httpService.PutAsAsync<int>(methodName, null);
         }
 

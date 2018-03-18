@@ -1,6 +1,7 @@
 ﻿using Coopers.BusinessLayer.API.Filters;
 using Coopers.BusinessLayer.NotifEye.APIClient.DTO;
 using Coopers.BusinessLayer.Services.Services;
+using Coopers.BusinessLayer.Utility;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -82,6 +83,20 @@ namespace Coopers.BusinessLayer.API.Controllers
         public async Task<IHttpActionResult> GetSensorDataMessagesByID([FromUri]int SensorID, [FromUri]string FromDate = "", [FromUri]string ToDate = "")
         {
             return Ok(await _sensorApplicationService.GetSensorDataMessagesByID(SensorID, FromDate, ToDate));
+        }
+
+        /// <summary>
+        /// Get the SecurityCode for a given SesorID
+        /// </summary>
+        /// <param name="SensorID">Unique identfier for a sensor</param>
+        /// <returns>Security code</returns>
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{SensorID}/SecurityCode")]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> GetSecurityCode(long SensorID)
+        {
+            return Ok(CheckDigitGenerator.GenerateSecurityCode(SensorID.ToString()));
         }
 
         #endregion

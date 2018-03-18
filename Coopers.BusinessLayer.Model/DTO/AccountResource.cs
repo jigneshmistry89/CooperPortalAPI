@@ -56,11 +56,31 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public string Name { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int SMSCarrierID { get; set; }
+
+        public bool DirectSMS { get; set; }
+
+        public bool RecievesMaintenanceByEmail { get; set; }
+
+        public bool RecievesMaintenanceBySMS { get; set; }
+
+        public bool RecievesNotificaitonsBySMS { get; set; }
+
+        public bool RecievesNotificaitonsByVoice { get; set; }
+
+        public string VoiceNumber { get; set; }
+
         public string EmailAddress { get; set; }
 
         public string SMSNumber { get; set; }
 
         public bool Admin { get; set; }
+
+        public List<long> NetworkPermissions { get; set; }
     }
 
 }

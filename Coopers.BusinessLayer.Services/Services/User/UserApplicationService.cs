@@ -19,18 +19,20 @@ namespace Coopers.BusinessLayer.Services.Services
         private readonly IEmailApplicationService _emailApplicationService;
         private readonly IPaymentHistoryApplicationService _paymentHistoryApplicationService;
         private readonly IAccountApplicationService _accountApplicationService;
-
+        private readonly INetworkApplicationService _networkApplicationService;
+        
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public UserApplicationService(IAccountApplicationService accountApplicationService,IUserClient userClient,IEmailApplicationService emailApplicationService, IPaymentHistoryApplicationService paymentHistoryApplicationService)
+        public UserApplicationService(INetworkApplicationService networkApplicationService,IAccountApplicationService accountApplicationService,IUserClient userClient,IEmailApplicationService emailApplicationService, IPaymentHistoryApplicationService paymentHistoryApplicationService)
         {
             _userClient = userClient;
             _emailApplicationService = emailApplicationService;
             _paymentHistoryApplicationService = paymentHistoryApplicationService;
             _accountApplicationService = accountApplicationService;
+            _networkApplicationService = networkApplicationService;
         }
 
         #endregion
@@ -54,13 +56,30 @@ namespace Coopers.BusinessLayer.Services.Services
         public async Task<UserDetailWithPaymentHistory> GetUserDetails()
         {
             var userDetail = new UserDetailWithPaymentHistory();
+
+            //Get the User details
             userDetail.User = await _userClient.GetUserInfo();
 
+            //If User is Admin 
             if(userDetail.User.Admin)
             {
 
+                //Get the Paymennthistories
                 userDetail.PaymentHistories = await _paymentHistoryApplicationService.GetPaymentHistoryList();
+                
+                //Get the users list
                 userDetail.Users = await _accountApplicationService.GetAccountUserList(userDetail.User.Account[0].AccountID);
+
+                foreach(var user in userDetail.Users)
+                {
+                    var userNames = user.Name.Split(' ');
+                    user.FirstName = userNames.Length> 0 ? userNames[0] : "";
+                    user.LastName = userNames.Length > 1 ? userNames[1] : "";
+                    //prepare networkpermissions
+                    var netWorkList = await _networkApplicationService.GetNetworkListByUser(user.UserName);
+                    if (netWorkList != null)
+                        user.NetworkPermissions = netWorkList.Select(x => x.NetworkID).ToList();
+                }
             }
 
             return userDetail;
