@@ -182,8 +182,8 @@ namespace Coopers.BusinessLayer.Services.Services
         /// Update Notification
         /// </summary>
         /// <param name="Notification">Notification Model</param>
-        /// <returns>No of records updated</returns>
-        public async Task<long> UpdateNotification(NotitifcationWithSchedules Notification)
+        /// <returns>Success/Failure</returns>
+        public async Task<string> UpdateNotification(NotitifcationWithSchedules Notification)
         {
             return await _notificationClient.UpdateNotification(Notification);
         }

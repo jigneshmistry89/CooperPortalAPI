@@ -608,7 +608,7 @@
             Update Notification
             </summary>
             <param name="Notification">Notification Model</param>
-            <returns>No of records updated</returns>
+            <returns>Success/Failure</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.NotificationController.CreateNotification(Coopers.BusinessLayer.Model.DTO.NotitifcationWithSchedules)">
             <summary>

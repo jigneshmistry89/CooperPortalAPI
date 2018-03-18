@@ -235,10 +235,10 @@ namespace Coopers.BusinessLayer.API.Controllers
         /// Update Notification
         /// </summary>
         /// <param name="Notification">Notification Model</param>
-        /// <returns>No of records updated</returns>
+        /// <returns>Success/Failure</returns>
         [HttpPut]
         [Route("")]
-        [ResponseType(typeof(long))]
+        [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> UpdateNotification(NotitifcationWithSchedules Notification)
         {
             return Ok(await _notificationApplicationService.UpdateNotification(Notification));

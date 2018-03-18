@@ -118,7 +118,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// Update Notification
         /// </summary>
         /// <param name="Notification">Notification Model</param>
-        /// <returns>No of records updated</returns>
-        Task<long> UpdateNotification(NotitifcationWithSchedules Notification);
+        /// <returns>Success/Failure</returns>
+        Task<string> UpdateNotification(NotitifcationWithSchedules Notification);
     }
 }

@@ -71,7 +71,9 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         //public long SensorID { get; set; }
 
-        public float Snooze { get; set; }
+        public int Snooze { get; set; }
+
+        public int ApplySnoozeByTriggerDevice { get; set; }
 
         //public string StartTime { get; set; }
 
@@ -91,7 +93,7 @@ namespace Coopers.BusinessLayer.Model.DTO
     {
         public long UserID { get; set; }
 
-        public int NotificationType { get; set; }
+        public List<int> NotificationType { get; set; }
     }
 
     public class Schedule

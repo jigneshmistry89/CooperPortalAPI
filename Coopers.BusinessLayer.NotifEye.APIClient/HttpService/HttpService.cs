@@ -193,7 +193,8 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
                 }
                 catch (Exception ex)
                 {
-                    throw PrepareHttpException(response, Method);
+                    var reason = (JsonConvert.DeserializeObject<APIResponse<string>>( await response.Content.ReadAsStringAsync())).Result;
+                    throw PrepareHttpException(reason, response.StatusCode, Method);
                 }
             }
             else
@@ -249,6 +250,16 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
             ex.Data.Add("Message", Response.ReasonPhrase);
             return ex;
         }
+
+        private Exception PrepareHttpException(string Reason,HttpStatusCode code, string Method)
+        {
+            var ex = new Exception();
+            ex.Data.Add("Method", Method);
+            ex.Data.Add("StatusCode", code);
+            ex.Data.Add("Message", Reason);
+            return ex;
+        }
+
 
         #endregion
 

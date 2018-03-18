@@ -249,10 +249,10 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// Update Notification
         /// </summary>
         /// <param name="Notification">Notification Model</param>
-        /// <returns>No of records updated</returns>
-        public async Task<long> UpdateNotification(NotitifcationWithSchedules Notification)
+        /// <returns>Success/Failure</returns>
+        public async Task<string> UpdateNotification(NotitifcationWithSchedules Notification)
         {
-            return await _httpService.PutAsAsync<long>("notification/editnotification", Notification);
+            return await _httpService.PutAsAsync<string>("notification/editnotification", Notification);
         }
 
         #endregion

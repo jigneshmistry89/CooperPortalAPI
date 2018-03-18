@@ -29,11 +29,13 @@ namespace Coopers.BusinessLayer.Services.DTO
 
     public class UpdateNetwork
     {
+        [Required]
         public long NetworkID { get; set; }
 
         [Required]
         public string Name { get; set; }
 
+        [Required]
         public bool SendNotifications { get; set; }
 
         public string Address { get; set; }
