@@ -9,6 +9,8 @@ using System.Web;
 using System;
 using AutoMapper;
 using Coopers.BusinessLayer.Database.APIClient.Location;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Coopers.BusinessLayer.Services.Services
 {
@@ -69,26 +71,36 @@ namespace Coopers.BusinessLayer.Services.Services
             //If User is Admin 
             if(userDetail.User.Admin)
             {
-
-                //Get the Paymennthistories
-                userDetail.PaymentHistories = await _paymentHistoryApplicationService.GetPaymentHistoryList();
-                
                 //Get the users list
                 userDetail.Users = await _accountApplicationService.GetAccountUserList(userDetail.User.Account[0].AccountID);
-
-                foreach(var user in userDetail.Users)
-                {
-                    var userNames = user.Name.Split(' ');
-                    user.FirstName = userNames.Length> 0 ? userNames[0] : "";
-                    user.LastName = userNames.Length > 1 ? userNames[1] : "";
-                    //prepare networkpermissions
-                    var netWorkList = await _networkApplicationService.GetNetworkListByUser(user.UserName);
-                    if (netWorkList != null)
-                        user.NetworkPermissions = netWorkList.Select(x => x.NetworkID).ToList();
-                }
             }
 
             return userDetail;
+        }
+
+        /// <summary>
+        /// Get the NetworPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique Indentifier for the User</param>
+        /// <returns>List of networkIds</returns>
+        public async Task<List<long>> GetNetworkPermissionsByUserID(long UserID)
+        {
+            List<long> netPermissions = new List<long>();
+
+            //Get the UserInfo for a given user ID
+            var user = await _userClient.GetUserInfoByID(UserID);
+
+            //Get the available NetworkList for a given user Name
+            var netWorkList = await _networkApplicationService.GetNetworkListByUser(user.UserName);
+
+            //prepare the NetworkList IDs
+            if (netWorkList != null)
+            {
+                netPermissions = netWorkList.Select(x => x.NetworkID).ToList();
+            }
+
+            //Return network permission IDs
+            return netPermissions;
         }
 
         /// <summary>
@@ -202,6 +214,26 @@ namespace Coopers.BusinessLayer.Services.Services
         public async Task<string> DeleteUser(long UserID)
         {
             return await _userClient.DeleteUser(UserID);
+        }
+
+        /// <summary>
+        /// Get the UserPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique indetofier for the User</param>
+        /// <returns>UserPermissions</returns>
+        public async Task<List<string>> GetUserPermissons(long UserID)
+        {
+            return await _userClient.GetUserPermissons(UserID);
+        }
+
+        /// <summary>
+        /// Update the User permissions
+        /// </summary>
+        /// <param name="UserPermission">Update Permissions info</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> UpdateUserPermissions(UserPermission UserPermission)
+        {
+            return await _userClient.UpdateUserPermissions(UserPermission);
         }
 
         #endregion

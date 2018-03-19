@@ -2,6 +2,7 @@
 using Coopers.BusinessLayer.Model.DTO;
 using Coopers.BusinessLayer.Services.Services;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -75,6 +76,31 @@ namespace Coopers.BusinessLayer.API.Controllers
             return Ok(await _userApplicationService.GetUserInfoByID(UserID));
         }
 
+        /// <summary>
+        /// Get the NetworPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique Indentifier for the User</param>
+        /// <returns>List of networkIds</returns>
+        [HttpGet]
+        [Route("{UserID}/NetworkPermissions")]
+        [ResponseType(typeof(List<string>))]
+        public async Task<IHttpActionResult> GetNetworkPermissons(long UserID)
+        {
+            return Ok(await _userApplicationService.GetNetworkPermissionsByUserID(UserID));
+        }
+
+        /// <summary>
+        /// Get the UserPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique indetofier for the User</param>
+        /// <returns>UserPermissions</returns>
+        [HttpGet]
+        [Route("{UserID}/Permissions")]
+        [ResponseType(typeof(List<string>))]
+        public async Task<IHttpActionResult> GetUserPermissons(long UserID)
+        {
+            return Ok(await _userApplicationService.GetUserPermissons(UserID));
+        }
 
         [AllowAnonymous]
         [HttpGet]
@@ -89,7 +115,7 @@ namespace Coopers.BusinessLayer.API.Controllers
         #endregion
 
 
-        #region PUT | APIs
+        #region DELETE | APIs
 
         /// <summary>
         /// Delete the user by the ID
@@ -107,7 +133,7 @@ namespace Coopers.BusinessLayer.API.Controllers
         #endregion
 
 
-        #region DELETE | APIs
+        #region PUT | APIs
 
         /// <summary>
         /// Update the user
@@ -120,6 +146,19 @@ namespace Coopers.BusinessLayer.API.Controllers
         public async Task<IHttpActionResult> UpdateUser(UpdateUser User)
         {
             return Ok(await _userApplicationService.UpdateUser(User));
+        }
+
+        /// <summary>
+        /// Update the user Network Permissions
+        /// </summary>
+        /// <param name="UserPermission">User Permission update info</param>
+        /// <returns>success/failure</returns>
+        [HttpPut]
+        [Route("UserPermission")]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> UpdateUser(UserPermission UserPermission)
+        {
+            return Ok(await _userApplicationService.UpdateUserPermissions(UserPermission));
         }
 
         #endregion

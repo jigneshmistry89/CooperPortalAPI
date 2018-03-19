@@ -781,6 +781,20 @@
             </summary>
             <returns>User Detail model</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.UserController.GetNetworkPermissons(System.Int64)">
+            <summary>
+            Get the NetworPermissions for a given User
+            </summary>
+            <param name="UserID">Unique Indentifier for the User</param>
+            <returns>List of networkIds</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.UserController.GetUserPermissons(System.Int64)">
+            <summary>
+            Get the UserPermissions for a given User
+            </summary>
+            <param name="UserID">Unique indetofier for the User</param>
+            <returns>UserPermissions</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.UserController.DeleteUser(System.Int64)">
             <summary>
             Delete the user by the ID
@@ -793,6 +807,13 @@
             Update the user
             </summary>
             <param name="User">User Model</param>
+            <returns>success/failure</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.UserController.UpdateUser(Coopers.BusinessLayer.Model.DTO.UserPermission)">
+            <summary>
+            Update the user Network Permissions
+            </summary>
+            <param name="UserPermission">User Permission update info</param>
             <returns>success/failure</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.UserController.CreateUser(Coopers.BusinessLayer.Model.DTO.UserCreate)">
@@ -813,6 +834,12 @@
             </summary>
             <param name="ProductName">Product Name</param>
             <returns>Payment Details model</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.PaymentController.GetPaymentHistory">
+            <summary>
+            Get the payment history for the currently loggedin user's Account 
+            </summary>
+            <returns>PaymetnHistory List</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.PaymentController.MakePayment(Coopers.BusinessLayer.Model.DTO.Payment)">
             <summary>

@@ -3,6 +3,7 @@ using Coopers.BusinessLayer.Model.DTO;
 using Coopers.BusinessLayer.Services.Services;
 using Elmah;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -24,15 +25,17 @@ namespace Coopers.BusinessLayer.API.Controllers
         #region PRIVATE MEMBERS
 
         private IPaymentApplicationService _paymentApplicationService;
+        private IPaymentHistoryApplicationService _paymentHistoryApplicationService;
 
         #endregion
 
 
         #region CONSTRUCTOR
 
-        public PaymentController(IPaymentApplicationService paymentApplicationService)
+        public PaymentController(IPaymentHistoryApplicationService paymentHistoryApplicationService,IPaymentApplicationService paymentApplicationService)
         {
             _paymentApplicationService = paymentApplicationService;
+            _paymentHistoryApplicationService = paymentHistoryApplicationService;
         }
 
         #endregion
@@ -76,6 +79,19 @@ namespace Coopers.BusinessLayer.API.Controllers
                 new MediaTypeHeaderValue("application/octet-stream");
 
             return result;
+        }
+
+
+        /// <summary>
+        /// Get the payment history for the currently loggedin user's Account 
+        /// </summary>
+        /// <returns>PaymetnHistory List</returns>
+        [HttpGet]
+        [Route("PaymentHistory")]
+        [ResponseType(typeof(List<PaymentHistoryInfo>))]
+        public async Task<IHttpActionResult> GetPaymentHistory()
+        {
+            return Ok(await _paymentHistoryApplicationService.GetPaymentHistoryList());
         }
 
         #endregion

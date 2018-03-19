@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Coopers.BusinessLayer.Model.DTO;
 using Coopers.BusinessLayer.NotifEye.APIClient.HttpService;
+using System.Collections.Generic;
 
 namespace Coopers.BusinessLayer.NotifEye.APIClient
 {
@@ -146,7 +147,19 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <returns>Success/Failure</returns>
         public async Task<string> UpdateUserPermissions(UserPermission UserPermission)
         {
-            return await _httpService.PutAsAsync<string>("User/UpdateUserPermissions ", UserPermission);
+            return await _httpService.PutAsAsync<string>("User/UpdateUserPermissions", UserPermission);
+        }
+
+        /// <summary>
+        /// Get the UserPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique indetofier for the User</param>
+        /// <returns>UserPermissions</returns>
+        public async Task<List<string>> GetUserPermissons(long UserID)
+        {
+            string queryParam = string.Format("CustomerID={0}", UserID);
+
+            return await _httpService.GetAsAsync<List<string>>("User/GetUserPermisssions", queryParam, true, false);
         }
 
         #endregion

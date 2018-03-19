@@ -1,4 +1,5 @@
 ﻿using Coopers.BusinessLayer.Model.DTO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Coopers.BusinessLayer.NotifEye.APIClient
@@ -69,6 +70,13 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="UserPermission">Update Permissions info</param>
         /// <returns>Success/Failure</returns>
         Task<string> UpdateUserPermissions(UserPermission UserPermission);
+
+        /// <summary>
+        /// Get the UserPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique indetofier for the User</param>
+        /// <returns>UserPermissions</returns>
+        Task<List<string>> GetUserPermissons(long UserID);
 
     }
 }

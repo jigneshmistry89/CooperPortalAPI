@@ -1,4 +1,5 @@
 ﻿using Coopers.BusinessLayer.Model.DTO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Coopers.BusinessLayer.Services.Services
@@ -23,6 +24,20 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <param name="UserID">Unique indetifier for the User</param>
         /// <returns>User Model</returns>
         Task<UserWithAccountInfo> GetUserInfoByID(long UserID);
+
+        /// <summary>
+        /// Get the UserPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique indetofier for the User</param>
+        /// <returns>UserPermissions</returns>
+        Task<List<string>> GetUserPermissons(long UserID);
+
+        /// <summary>
+        /// Get the NetworPermissions for a given User
+        /// </summary>
+        /// <param name="UserID">Unique Indentifier for the User</param>
+        /// <returns>List of networkIds</returns>
+        Task<List<long>> GetNetworkPermissionsByUserID(long UserID);
 
         Task<string> SendRegisterationLink(string UserName);
 
@@ -60,6 +75,13 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <param name="UserID">Unique identifier for the user</param>
         /// <returns>Success/Failure</returns>
         Task<string> DeleteUser(long UserID);
+
+        /// <summary>
+        /// Update the User permissions
+        /// </summary>
+        /// <param name="UserPermission">Update Permissions info</param>
+        /// <returns>Success/Failure</returns>
+        Task<string> UpdateUserPermissions(UserPermission UserPermission);
 
     }
 }
