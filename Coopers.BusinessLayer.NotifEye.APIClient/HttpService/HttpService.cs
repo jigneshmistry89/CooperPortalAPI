@@ -52,7 +52,8 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(await response.Content.ReadAsStringAsync());
+                    var reason = (JsonConvert.DeserializeObject<APIResponse<string>>(await response.Content.ReadAsStringAsync())).Result;
+                    throw PrepareHttpException(reason, response.StatusCode, Method);
                 }
             }
             else
@@ -127,7 +128,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
             }
             else
             {
-                throw PrepareHttpException(response, Method);
+                throw PrepareHttpException(response, Method, await  response.Content.ReadAsStringAsync());
             }
         }
 
@@ -271,12 +272,20 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.HttpService
             return await _authenticationClient.GetLegacyNotifEyeToken(currUser.UserName);
         }
 
-        private Exception PrepareHttpException(HttpResponseMessage Response,string Method)
+        private Exception PrepareHttpException(HttpResponseMessage Response,string Method,string Message = "")
         {
             var ex = new Exception();
             ex.Data.Add("Method", Method);
             ex.Data.Add("StatusCode", Response.StatusCode);
-            ex.Data.Add("Message", Response.ReasonPhrase);
+            if (string.IsNullOrEmpty(Message))
+            {
+                ex.Data.Add("Message", Response.ReasonPhrase);
+            }
+            else
+            {
+                ex.Data.Add("Message", Response.ReasonPhrase + Message);
+            }
+            
             return ex;
         }
 

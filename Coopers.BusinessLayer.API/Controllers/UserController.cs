@@ -83,7 +83,7 @@ namespace Coopers.BusinessLayer.API.Controllers
         /// <returns>List of networkIds</returns>
         [HttpGet]
         [Route("{UserID}/NetworkPermissions")]
-        [ResponseType(typeof(List<string>))]
+        [ResponseType(typeof(List<NetworkPermission>))]
         public async Task<IHttpActionResult> GetNetworkPermissons(long UserID)
         {
             return Ok(await _userApplicationService.GetNetworkPermissionsByUserID(UserID));

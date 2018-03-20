@@ -11,4 +11,15 @@ namespace Coopers.BusinessLayer.Model.DTO
         public bool SendNotifications { get; set; }
 
     }
+
+    public class NetworkPermission
+    {
+        public long NetworkID { get; set; }
+
+        public string NetworkName { get; set; }
+
+        public bool CanAccess { get; set; }
+
+    }
+
 }

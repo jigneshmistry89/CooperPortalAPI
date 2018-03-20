@@ -82,21 +82,28 @@ namespace Coopers.BusinessLayer.Services.Services
         /// Get the NetworPermissions for a given User
         /// </summary>
         /// <param name="UserID">Unique Indentifier for the User</param>
-        /// <returns>List of networkIds</returns>
-        public async Task<List<long>> GetNetworkPermissionsByUserID(long UserID)
+        /// <returns>List of NetworkPermission</returns>
+        public async Task<List<NetworkPermission>> GetNetworkPermissionsByUserID(long UserID)
         {
-            List<long> netPermissions = new List<long>();
+            List<NetworkPermission> netPermissions = new List<NetworkPermission>();
 
-            //Get the UserInfo for a given user ID
-            var user = await _userClient.GetUserInfoByID(UserID);
+            //Get the UserInfo for a given user.
+            var userInfo = await _userClient.GetUserInfoByID(UserID);
 
-            //Get the available NetworkList for a given user Name
-            var netWorkList = await _networkApplicationService.GetNetworkListByUser(user.UserName);
-
-            //prepare the NetworkList IDs
-            if (netWorkList != null)
+            if (userInfo != null && userInfo.Account != null && userInfo.Account.Count > 0)
             {
-                netPermissions = netWorkList.Select(x => x.NetworkID).ToList();
+                //Get the available NetworkList for a primary account user.
+                var allNetWorkList = await _networkApplicationService.GetNetworkListByUser(userInfo.Account[0].UserName);
+               
+                //Get the available NetworkList for a given user Name
+                var usersNetWorkList = await _networkApplicationService.GetNetworkListByUser(userInfo.UserName);
+
+                netPermissions = allNetWorkList.Select(x => new NetworkPermission
+                {
+                    NetworkID = x.NetworkID,
+                    NetworkName = x.NetworkName,
+                    CanAccess = usersNetWorkList.Any(y => y.NetworkID == x.NetworkID)
+                }).ToList();
             }
 
             //Return network permission IDs

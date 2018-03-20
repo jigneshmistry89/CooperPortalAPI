@@ -36,8 +36,8 @@ namespace Coopers.BusinessLayer.Services.Services
         /// Get the NetworPermissions for a given User
         /// </summary>
         /// <param name="UserID">Unique Indentifier for the User</param>
-        /// <returns>List of networkIds</returns>
-        Task<List<long>> GetNetworkPermissionsByUserID(long UserID);
+        /// <returns>List of NetworkPermission</returns>
+        Task<List<NetworkPermission>> GetNetworkPermissionsByUserID(long UserID);
 
         Task<string> SendRegisterationLink(string UserName);
 
