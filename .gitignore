@@ -3,12 +3,12 @@
 ################################################################################
 
 /Coopers.BusinessLayer.API/obj
-/Coopers.BusinessLayer.API/Properties/PublishProfiles
+/Coopers.BusinessLayer.API/Properties/PublishProfiles/localPortalAPI.pubxml.user
 /Coopers.BusinessLayer.API/bin
 /Coopers.BusinessLayer.API/Coopers.BusinessLayer.API.csproj.user
 /Coopers.BusinessLayer.Database.API/bin
 /Coopers.BusinessLayer.Database.API/obj
-/Coopers.BusinessLayer.Database.API/Properties/PublishProfiles
+/Coopers.BusinessLayer.Database.API/Properties/PublishProfiles/localPortalAPI.pubxml.user
 /Coopers.BusinessLayer.Database.Domain/obj
 /Coopers.BusinessLayer.Database.Domain/bin
 /Coopers.BusinessLayer.Database.Models/obj
