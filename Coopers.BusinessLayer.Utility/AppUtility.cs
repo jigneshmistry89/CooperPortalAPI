@@ -27,5 +27,28 @@ namespace Coopers.BusinessLayer.Utility
 
             return addr;
         }
+
+        public static void SpitNameIntoFNameAndLName(string Name,ref string FName,ref string LName)
+        {
+            var names = Name.Split(' ');
+
+            if(names.Length > 0)
+            {
+                FName = names[0].Trim();
+            }
+
+            if(names.Length > 1)
+            {
+                if (names.Length == 3 && names[1] == " ")
+                {
+                    LName = names[2].Trim();
+                }
+                else
+                {
+                    LName = names[1].Trim();
+                }
+            }
+        }
+
     }
 }
