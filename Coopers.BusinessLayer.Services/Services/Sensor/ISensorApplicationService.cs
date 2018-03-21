@@ -94,5 +94,19 @@ namespace Coopers.BusinessLayer.Services.Services
         /// <param name="SensorAttribute">Sensor attribute model</param>
         /// <returns>Created/Updated Sensor attribute model</returns>
         Task<SensorAttribute> UpdateSensorAttribute(SensorAttribute SensorAttribute);
+
+        /// <summary>
+        /// Get the note for a given SensorID
+        /// </summary>
+        /// <param name="SensorID">Unique identofier for the Sensor</param>
+        /// <returns>Note value</returns>
+        Task<string> GetSensorNote(long SensorID);
+
+        /// <summary>
+        /// Update the Note for a given SensorID
+        /// </summary>
+        /// <param name="SensorNote">SensorNote update model</param>
+        /// <returns>Success/Failure</returns>
+        Task<string> SetSensorNote(UpdateSensorNote SensorNote);
     }
 }

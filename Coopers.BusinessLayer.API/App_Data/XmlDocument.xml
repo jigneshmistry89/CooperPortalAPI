@@ -870,6 +870,13 @@
             <param name="SensorID">Unique identfier for a sensor</param>
             <returns>Security code</returns>
         </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.GetSensorNote(System.Int64)">
+            <summary>
+            Get the note for a given SensorID
+            </summary>
+            <param name="SensorID">Unique identofier for the Sensor</param>
+            <returns>Note value</returns>
+        </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensor(Coopers.BusinessLayer.Model.DTO.UpdateSensor)">
             <summary>
             Update the SensorName and the Heartbeat info
@@ -905,6 +912,13 @@
             </summary>
             <param name="SensorBulkAssign">Sensor Bulk Assign Model</param>
             <returns>Success if Sensor assigned successfully</returns>
+        </member>
+        <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.UpdateSensorNote(Coopers.BusinessLayer.Model.DTO.UpdateSensorNote)">
+            <summary>
+            Update the Note for a given SensorID
+            </summary>
+            <param name="SensorNote">SensorNote update model</param>
+            <returns>Success/Failure</returns>
         </member>
         <member name="M:Coopers.BusinessLayer.API.Controllers.SensorController.CreateSensor(Coopers.BusinessLayer.Model.DTO.CreateSensor)">
             <summary>

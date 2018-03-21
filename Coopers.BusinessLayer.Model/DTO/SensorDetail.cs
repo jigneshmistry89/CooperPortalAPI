@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coopers.BusinessLayer.Model.DTO
 {
@@ -119,6 +120,21 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public string SensorCode { get; set; }
 
+    }
+
+    public class UpdateSensorNote
+    {
+        [Required]
+        public long SensorID { get; set; }
+
+        [Required]
+        public string Note { get; set; }
+
+    }
+
+    public class SensorNoteResponse
+    {
+        public string Message { get; set; }
     }
 
 }

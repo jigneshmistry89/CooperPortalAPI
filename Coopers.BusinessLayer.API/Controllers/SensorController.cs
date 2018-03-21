@@ -99,6 +99,20 @@ namespace Coopers.BusinessLayer.API.Controllers
             return Ok(CheckDigitGenerator.GenerateSecurityCode(SensorID.ToString()));
         }
 
+        /// <summary>
+        /// Get the note for a given SensorID
+        /// </summary>
+        /// <param name="SensorID">Unique identofier for the Sensor</param>
+        /// <returns>Note value</returns>
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{SensorID}/Note")]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> GetSensorNote(long SensorID)
+        {
+            return Ok(await _sensorApplicationService.GetSensorNote(SensorID));
+        }
+
         #endregion
 
         #region PUT | APIs
@@ -169,6 +183,20 @@ namespace Coopers.BusinessLayer.API.Controllers
         public async Task<IHttpActionResult> BulkAssignSensor([FromBody]Model.DTO.SensorBulkAssign SensorBulkAssign)
         {
             return Ok(await _sensorApplicationService.BulkAssignSensor(SensorBulkAssign));
+        }
+
+
+        /// <summary>
+        /// Update the Note for a given SensorID
+        /// </summary>
+        /// <param name="SensorNote">SensorNote update model</param>
+        /// <returns>Success/Failure</returns>
+        [HttpPut]
+        [Route("Note")]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> UpdateSensorNote([FromBody]Model.DTO.UpdateSensorNote SensorNote)
+        {
+            return Ok(await _sensorApplicationService.SetSensorNote(SensorNote));
         }
 
         #endregion

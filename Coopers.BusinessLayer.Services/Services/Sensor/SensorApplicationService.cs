@@ -227,6 +227,26 @@ namespace Coopers.BusinessLayer.Services.Services
             return await _sensorClient.SensorAttributeSet(SensorAttribute);
         }
 
+        /// <summary>
+        /// Get the note for a given SensorID
+        /// </summary>
+        /// <param name="SensorID">Unique identofier for the Sensor</param>
+        /// <returns>Note value</returns>
+        public async Task<string> GetSensorNote(long SensorID)
+        {
+            return await _sensorClient.GetSensorNote(SensorID);
+        }
+
+        /// <summary>
+        /// Update the Note for a given SensorID
+        /// </summary>
+        /// <param name="SensorNote">SensorNote update model</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> SetSensorNote(UpdateSensorNote SensorNote)
+        {
+            return await _sensorClient.SetSensorNote(SensorNote);
+        }
+
         #endregion
 
 

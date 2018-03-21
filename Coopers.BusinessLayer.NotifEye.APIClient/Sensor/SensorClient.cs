@@ -216,6 +216,28 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         #region INTEGRATED API
 
         /// <summary>
+        /// Get the note for a given SensorID
+        /// </summary>
+        /// <param name="SensorID">Unique identofier for the Sensor</param>
+        /// <returns>Note value</returns>
+        public async Task<string> GetSensorNote(long SensorID)
+        {
+            var sensorMessage = await _httpService.GetAsAsync<Model.DTO.SensorNoteResponse>("sensor/GetSensorNote", string.Format("Sensorid={0}", SensorID), true,false);
+            return sensorMessage.Message;
+        }
+
+        /// <summary>
+        /// Update the Note for a given SensorID
+        /// </summary>
+        /// <param name="SensorNote">SensorNote update model</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> SetSensorNote(Model.DTO.UpdateSensorNote SensorNote)
+        {
+            var sensorMessage = await _httpService.PutAsAsync<Model.DTO.SensorNoteResponse>("sensor/SetSensorNote", SensorNote);
+            return sensorMessage.Message;
+        }
+
+        /// <summary>
         /// Create a Sensor
         /// </summary>
         /// <param name="CreateSensor">Create sensor model</param>
