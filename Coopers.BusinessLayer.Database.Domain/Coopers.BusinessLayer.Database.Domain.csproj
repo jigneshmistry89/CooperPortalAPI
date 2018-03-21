@@ -68,7 +68,6 @@
     <Compile Include="IRepositories\ITaxableStatesRepository.cs" />
     <Compile Include="IRepositories\IPaymentHistoryRepository.cs" />
     <Compile Include="IRepositories\INetworkLocationRepository.cs" />
-    <Compile Include="IRepositories\ILocationRepository.cs" />
     <Compile Include="IRepositories\IRepository.cs" />
     <Compile Include="Migrations\201801240851547_Initial Create.cs" />
     <Compile Include="Migrations\201801240851547_Initial Create.Designer.cs">

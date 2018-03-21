@@ -19,7 +19,6 @@ namespace Coopers.BusinessLayer.Services.Services
 
         #region PRIVATE MEMBERS
 
-        private readonly ILocationClient _locationClient;
         private readonly ISensorClient _sensorClient;
         private readonly IGatewayClient _gatewayClient;
         private readonly IMapper _mapper;
@@ -32,10 +31,9 @@ namespace Coopers.BusinessLayer.Services.Services
 
         #region CONSTRUCTOR
 
-        public LocationApplicationService(ILocationClient locationClient, IGatewayClient gatewayClient, ISensorClient sensorClient, INetworkClient networkClient, IMapper mapper,
+        public LocationApplicationService( IGatewayClient gatewayClient, ISensorClient sensorClient, INetworkClient networkClient, IMapper mapper,
               INetworkLocationClient networkLocationClient)
         {
-            _locationClient = locationClient;
             _sensorClient = sensorClient;
             _gatewayClient = gatewayClient;
             _networkClient = networkClient;

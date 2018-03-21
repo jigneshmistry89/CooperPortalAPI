@@ -63,7 +63,6 @@
     <Compile Include="Repository\TaxableStatesRepository.cs" />
     <Compile Include="Repository\PaymentHistoryRepository.cs" />
     <Compile Include="Repository\NetworkLocationRepository.cs" />
-    <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,6 @@ namespace Coopers.BusinessLayer.Database.API
             var config = GlobalConfiguration.Configuration;
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType(typeof(LocationRepository)).AsImplementedInterfaces();
             builder.RegisterType(typeof(NetworkLocationRepository)).AsImplementedInterfaces();
             builder.RegisterType(typeof(PaymentHistoryRepository)).AsImplementedInterfaces();
             builder.RegisterType(typeof(TaxableStatesRepository)).AsImplementedInterfaces();

@@ -48,7 +48,6 @@ namespace Coopers.BusinessLayer.API
 
             builder.RegisterType(typeof(SensorClient)).As<ISensorClient>();
             builder.RegisterType(typeof(GatewayClient)).As<IGatewayClient>();
-            builder.RegisterType(typeof(LocationClient)).As<ILocationClient>();
             builder.RegisterType(typeof(AccountClient)).As<IAccountClient>();
             builder.RegisterType(typeof(NetworkClient)).As<INetworkClient>();
             builder.RegisterType(typeof(NotificationClient)).As<INotificationClient>();
