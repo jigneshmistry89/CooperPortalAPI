@@ -127,5 +127,16 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// <param name="SensorNote">SensorNote update model</param>
         /// <returns>Success/Failure</returns>
         Task<string> SetSensorNote(Model.DTO.UpdateSensorNote SensorNote);
+
+        /// <summary>
+        /// Sets the thresholds of the sensor that activate Aware State
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <param name="MinimumThreshold">Minimum Threshold</param>
+        /// <param name="MaximumThreshold">Maximum Threshold</param>
+        /// <param name="Hysteresis">Hysteresis applied before entering normal operation mode</param>
+        /// <param name="MeasurementsPerTransmission">Number of times per heartbeat the thresholds are checked.</param>
+        /// <returns>Success/Failure</returns>
+        Task<string> SensorSetThreshold(long SensorID, long MinimumThreshold, long MaximumThreshold, long Hysteresis, long MeasurementsPerTransmission = 1);
     }
 }

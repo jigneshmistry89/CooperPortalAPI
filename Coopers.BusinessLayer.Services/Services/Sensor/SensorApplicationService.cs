@@ -192,7 +192,10 @@ namespace Coopers.BusinessLayer.Services.Services
             var retVal = "";
 
             retVal = await _sensorClient.SensorSetName(UpdateSensor.SensorID, UpdateSensor.SensorName);
-            if(retVal == "Success")
+
+            retVal = await _sensorClient.SensorSetThreshold(UpdateSensor.SensorID, UpdateSensor.MinimumThreshold, UpdateSensor.MaximumThreshold, 20);
+
+            if (retVal == "Success")
             {
                 retVal = await _sensorClient.SensorSetHeartbeat(UpdateSensor.SensorID, UpdateSensor.HeartBeat, UpdateSensor.HeartBeat);
             }

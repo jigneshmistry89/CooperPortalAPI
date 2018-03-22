@@ -53,6 +53,9 @@ namespace Coopers.BusinessLayer.Model.DTO
         public float BatteryLevel { get; set; }
         public float SignalStrength { get; set; }
         public bool AlertsActive { get; set; }
+        public long MinimumThreshold { get; set; }
+        public long MaximumThreshold { get; set; }
+        public string Scale { get; set; }
     }
 
     public class GatewayDetails

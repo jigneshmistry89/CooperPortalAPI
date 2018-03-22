@@ -62,6 +62,8 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public int SMSCarrierID { get; set; }
 
+        public long ExternalSMSProviderID { get; set; }
+
         public bool DirectSMS { get; set; }
 
         public bool RecievesMaintenanceByEmail { get; set; }

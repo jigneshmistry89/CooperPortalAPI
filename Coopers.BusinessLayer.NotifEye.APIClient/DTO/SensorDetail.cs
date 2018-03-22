@@ -36,5 +36,10 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.DTO
         public short SignalStrength { get; set; }
 
         public bool AlertsActive { get; set; }
+
+        public long MinimumThreshold { get; set; }
+
+        public long MaximumThreshold { get; set; }
+
     }
 }

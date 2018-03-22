@@ -75,7 +75,8 @@ namespace Coopers.BusinessLayer.API
                     x.CreateMap<LocationSummary, LocationDTO>().ReverseMap();
                     x.CreateMap<LocationDetails, LocationDTO>().ReverseMap();
                     x.CreateMap<SensorDetails, NotifEye.APIClient.DTO.SensorDetail>().ReverseMap()
-                     .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.MonnitApplicationID));
+                     .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.MonnitApplicationID))
+                     .ForMember(dest => dest.Scale, opt => opt.MapFrom(src => src.CurrentReading.Contains("C") ? "C" : "F"));
                     x.CreateMap<SensorInfo, NotifEye.APIClient.DTO.SensorDetail>().ReverseMap()
                                 .ForMember(dest => dest.SensorType, opt => opt.MapFrom(src => src.MonnitApplicationID));
                     x.CreateMap<GatewayDetails, GatewayDTO>().ReverseMap();

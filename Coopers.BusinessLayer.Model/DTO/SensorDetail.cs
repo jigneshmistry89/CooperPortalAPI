@@ -95,6 +95,8 @@ namespace Coopers.BusinessLayer.Model.DTO
         public long SensorID { get; set; }
         public string SensorName { get; set; }
         public double HeartBeat { get; set; }
+        public long MinimumThreshold { get; set; }
+        public long MaximumThreshold { get; set; }
     }
 
     public class SensorAttribute

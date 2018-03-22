@@ -82,7 +82,6 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             return JsonConvert.DeserializeObject<List<SensorDetail>>((await GetSensorList(UserName,"", NetworkID)).ToString());
         }
 
-
         /// <summary>
         /// Returns the sensor detials.
         /// </summary>
@@ -127,8 +126,6 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         {
             return await _httpService.GetAsAsync<List<DataMessages>>("SensorRecentDataMessages", string.Format("SensorID={0}&Minutes={1}", SensorID, Minutes), false, false);
         }
-
-       
 
         /// <summary>
         /// Removes the sensor object from the network.
@@ -208,6 +205,21 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
             var queryParam = string.Format("SensorID={0}", SensorID);
 
             return await _httpService.GetAsAsync<List<Model.DTO.SensorAttribute>>("SensorAttributes", queryParam, false, false);
+        }
+
+        /// <summary>
+        /// Sets the thresholds of the sensor that activate Aware State
+        /// </summary>
+        /// <param name="SensorID">Unique identifier of the sensor</param>
+        /// <param name="MinimumThreshold">Minimum Threshold</param>
+        /// <param name="MaximumThreshold">Maximum Threshold</param>
+        /// <param name="Hysteresis">Hysteresis applied before entering normal operation mode</param>
+        /// <param name="MeasurementsPerTransmission">Number of times per heartbeat the thresholds are checked.</param>
+        /// <returns>Success/Failure</returns>
+        public async Task<string> SensorSetThreshold(long SensorID,long MinimumThreshold,long MaximumThreshold,long Hysteresis,long MeasurementsPerTransmission=1)
+        {
+            string query = string.Format("SensorID={0}&MinimumThreshold={1}&MaximumThreshold={2}&Hysteresis={3}&MeasurementsPerTransmission={4}", SensorID, MinimumThreshold, MaximumThreshold, Hysteresis, MeasurementsPerTransmission);
+            return await _httpService.GetAsAsync<string>("SensorSetThreshold", query, false, false);
         }
 
         #endregion

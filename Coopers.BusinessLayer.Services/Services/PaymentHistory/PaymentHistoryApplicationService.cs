@@ -123,6 +123,9 @@ namespace Coopers.BusinessLayer.Services.Services
         {
             var notTransactionInfo = JsonConvert.DeserializeObject<NotifEyeTransactionInfo>(paymentHistory.Data);
             var retVal = _mapper.Map<PaymentHistoryInfo>(notTransactionInfo);
+            retVal.TotalAmount = retVal.TotalAmount / 100;
+            retVal.TaxAmount = retVal.TaxAmount / 100;
+            retVal.SubscriptionAmount = retVal.SubscriptionAmount / 100;
             retVal.ID = paymentHistory.ID;
             retVal.StripeChargeID = paymentHistory.StripeChargeID;
             retVal.ProductName = paymentHistory.ProductName;
