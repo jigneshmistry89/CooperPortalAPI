@@ -11,7 +11,18 @@ namespace Coopers.BusinessLayer.Database.APIClient
 
         #region PRIVATE MEMBER
 
-        private string TaxableStateClientEndPoint = ConfigurationManager.AppSettings["MicroServiceAPIEndpoint"] + "TaxableState/";
+        private string TaxableStateClientEndPoint = "TaxableState/";
+        private readonly IHttpService _httpService;
+
+        #endregion
+
+
+        #region CONSTRUCTOR
+
+        public TaxableStateClient(IHttpService httpService)
+        {
+            _httpService = httpService;
+        }
 
         #endregion
 
@@ -20,17 +31,16 @@ namespace Coopers.BusinessLayer.Database.APIClient
 
         public async Task<TaxableStates> GetTaxableStatebyStateCode(string StateCode)
         {
-            HttpResponseMessage response = await new HttpClient().GetAsync(TaxableStateClientEndPoint + "?StateCode=" + StateCode);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return (await response.Content.ReadAsAsync<TaxableStates>());
+                return await _httpService.GetAsAsync<TaxableStates>(TaxableStateClientEndPoint, string.Format("StateCode={0}", StateCode));
             }
-            else
+            catch (Exception)
             {
                 return null;
             }
+             
         }
-
 
         #endregion
 

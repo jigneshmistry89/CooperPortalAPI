@@ -13,7 +13,17 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
 
         #region PRIVATE MEMBER
 
-        private string NetowrkLocationEndPoint = ConfigurationManager.AppSettings["MicroServiceAPIEndpoint"] + "NetworkLocation/";
+        private string NetowrkLocationEndPoint = "NetworkLocation/";
+        private readonly IHttpService _httpService;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public NetworkLocationClient(IHttpService httpService)
+        {
+            _httpService = httpService;
+        }
 
         #endregion
 
@@ -26,15 +36,9 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <returns>Networklocation Model</returns>
         public async Task<NetworkLocation> GetNetworkLocationByID(long CSNetID)
         {
-            NetworkLocation res = new NetworkLocation();
-
-            HttpResponseMessage response = await new HttpClient().GetAsync(NetowrkLocationEndPoint + "/" + CSNetID);
-            if (response.IsSuccessStatusCode)
-            {
-                res = (await response.Content.ReadAsAsync<NetworkLocation>());
-            }
-            return await Task.FromResult(res);
+            return await _httpService.GetAsAsync<NetworkLocation>(NetowrkLocationEndPoint + "/" + CSNetID,"");
         }
+
 
         /// <summary>
         /// Create a NewtworkLocation in Db
@@ -43,13 +47,7 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <returns>Id of the created Networklocation</returns>
         public async Task<long> CreateNetworkLocation(NetworkLocation NetworkLocation)
         {
-            long res = 0;
-            HttpResponseMessage response = await new HttpClient().PostAsJsonAsync(NetowrkLocationEndPoint, NetworkLocation);
-            if (response.IsSuccessStatusCode)
-            {
-                res = (await response.Content.ReadAsAsync<long>());
-            }
-            return await Task.FromResult(res);
+            return await _httpService.PostAsAsync<long>(NetowrkLocationEndPoint, NetworkLocation);
         }
 
 
@@ -60,13 +58,7 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <returns>No of records updated</returns>
         public async Task<int> UpdateNetworkLocation(NetworkLocation NetworkLocation)
         {
-            int res = 0;
-            HttpResponseMessage response = await new HttpClient().PutAsJsonAsync(NetowrkLocationEndPoint, NetworkLocation);
-            if (response.IsSuccessStatusCode)
-            {
-                res = (await response.Content.ReadAsAsync<int>());
-            }
-            return await Task.FromResult(res);
+            return await _httpService.PutAsAsync<int>(NetowrkLocationEndPoint, NetworkLocation);
         }
 
         #endregion

@@ -54,10 +54,11 @@ namespace Coopers.BusinessLayer.API
             builder.RegisterType(typeof(LookupClient)).As<ILookupClient>();
             builder.RegisterType(typeof(AuthenticationClient)).As<IAuthenticationClient>();
             builder.RegisterType(typeof(NetworkLocationClient)).As<INetworkLocationClient>();
-            builder.RegisterType(typeof(HttpService)).As<IHttpService>();
+            builder.RegisterType(typeof(NotifEye.APIClient.HttpService.HttpService)).As<NotifEye.APIClient.HttpService.IHttpService>();
             builder.RegisterType(typeof(PaymentHistoryClient)).As<IPaymentHistoryClient>();
             builder.RegisterType(typeof(TaxableStateClient)).As<ITaxableStateClient>();
             builder.RegisterType(typeof(AccountLocationClient)).As<IAccountLocationClient>();
+            builder.RegisterType(typeof(Coopers.BusinessLayer.Database.APIClient.HttpService)).As<Database.APIClient.IHttpService>();
 
             builder.RegisterType(typeof(UserClient)).As<IUserClient>();
 

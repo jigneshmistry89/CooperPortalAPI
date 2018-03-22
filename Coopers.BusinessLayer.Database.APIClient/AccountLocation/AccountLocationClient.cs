@@ -1,10 +1,6 @@
-﻿using Coopers.BusinessLayer.Database.APIClient.DTO;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System;
-using Newtonsoft.Json;
 using Coopers.BusinessLayer.Model.DTO;
 
 namespace Coopers.BusinessLayer.Database.APIClient.Location
@@ -14,9 +10,21 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
 
         #region PRIVATE MEMBER
 
-        private string AccountLocationEndPoint = ConfigurationManager.AppSettings["MicroServiceAPIEndpoint"] + "AccountLocation/";
+        private readonly string AccountLocationEndPoint = "AccountLocation/";
+        private readonly IHttpService _httpService;
 
         #endregion
+
+
+        #region CONSTRUCTOR
+
+        public AccountLocationClient(IHttpService httpService)
+        {
+            _httpService = httpService;
+        }
+
+        #endregion
+
 
         #region PUBLIC MEMBERS
 
@@ -27,13 +35,7 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <returns>Id of the newly created AccountLocation</returns>
         public async Task<long> CreateAccountLocation(AccountLocation AccountLocation)
         {
-            long res = 0;
-            HttpResponseMessage response = await new HttpClient().PostAsJsonAsync(AccountLocationEndPoint, AccountLocation);
-            if (response.IsSuccessStatusCode)
-            {
-                res = (await response.Content.ReadAsAsync<long>());
-            }
-            return await Task.FromResult(res);
+            return await _httpService.PostAsAsync<long>(AccountLocationEndPoint, AccountLocation);
         }
 
         /// <summary>
@@ -43,14 +45,7 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <returns>AccountLocation Model</returns>
         public async Task<AccountLocation> GetAccountLocationByID(long AccountID)
         {
-            AccountLocation res = new AccountLocation();
-
-            HttpResponseMessage response = await new HttpClient().GetAsync(AccountLocationEndPoint + "/" + AccountID);
-            if (response.IsSuccessStatusCode)
-            {
-                res = (await response.Content.ReadAsAsync<AccountLocation>());
-            }
-            return await Task.FromResult(res);
+            return await _httpService.GetAsAsync<AccountLocation>(AccountLocationEndPoint + AccountID, "");
         }
 
         /// <summary>
@@ -60,13 +55,7 @@ namespace Coopers.BusinessLayer.Database.APIClient.Location
         /// <returns>No of records Update</returns>
         public async Task<int> UpdateAccountLocation(AccountLocation AccountLocation)
         {
-            int res = 0;
-            HttpResponseMessage response = await new HttpClient().PutAsJsonAsync(AccountLocationEndPoint, AccountLocation);
-            if (response.IsSuccessStatusCode)
-            {
-                res = (await response.Content.ReadAsAsync<int>());
-            }
-            return await Task.FromResult(res);
+            return await _httpService.PutAsAsync<int>(AccountLocationEndPoint, AccountLocation);
         }
 
         #endregion

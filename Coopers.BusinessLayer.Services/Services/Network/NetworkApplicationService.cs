@@ -37,6 +37,7 @@ namespace Coopers.BusinessLayer.Services.Services
 
         #region PUBLIC MEMBERS     
 
+
         /// <summary>
         /// Returns the list of networks that belong to user.
         /// </summary>
@@ -56,6 +57,7 @@ namespace Coopers.BusinessLayer.Services.Services
         {
             return await _networkClient.GetNetworkListByUser(UserName);
         }
+
 
         /// <summary>
         /// Adds new wireless sensor network to account
@@ -88,6 +90,7 @@ namespace Coopers.BusinessLayer.Services.Services
             return await _networkClient.DeleteNetwork(NetworkID);
         }
 
+
         /// <summary>
         /// Update the Network and the NetworkLocation record
         /// </summary>
@@ -112,6 +115,7 @@ namespace Coopers.BusinessLayer.Services.Services
 
             return result;
         }
+
 
         #endregion
 

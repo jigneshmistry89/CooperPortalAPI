@@ -1,20 +1,31 @@
-﻿using Coopers.BusinessLayer.Database.APIClient.DTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using Coopers.BusinessLayer.Model.DTO;
-using Newtonsoft.Json;
 
 namespace Coopers.BusinessLayer.Database.APIClient
 {
     public class PaymentHistoryClient : IPaymentHistoryClient
     {
 
+
         #region PRIVATE MEMBER
 
-        private string PaymentHistoryEndPoint = ConfigurationManager.AppSettings["MicroServiceAPIEndpoint"] + "PaymentHistory/";
+        private string PaymentHistoryEndPoint = "PaymentHistory/";
+        private readonly IHttpService _httpService;
+
+        #endregion
+
+
+        #region CONSTRUCTOR
+
+        public PaymentHistoryClient(IHttpService httpService)
+        {
+            _httpService = httpService;
+        }
+
 
         #endregion
 
@@ -30,11 +41,15 @@ namespace Coopers.BusinessLayer.Database.APIClient
         {
             long paymentHistoryID = 0;
 
-            HttpResponseMessage response = await new HttpClient().PostAsJsonAsync(PaymentHistoryEndPoint, PaymentHistory);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                paymentHistoryID = (await response.Content.ReadAsAsync<long>());
+                paymentHistoryID = await _httpService.PostAsAsync<long>(PaymentHistoryEndPoint, PaymentHistory);
             }
+            catch (Exception)
+            {
+                //Do Nothing..
+            }
+
             return await Task.FromResult(paymentHistoryID);
         }
 
@@ -45,16 +60,7 @@ namespace Coopers.BusinessLayer.Database.APIClient
         /// <returns>No of records updated</returns>
         public async Task<int> DeletePaymentHistoryByID(long PaymentHistoryID)
         {
-            int retVal = 0;
-            string query = string.Format("?PaymentHistoryID={0}", PaymentHistoryID);
-            HttpResponseMessage response = await new HttpClient().DeleteAsync(PaymentHistoryEndPoint.TrimEnd('/')+ query);
-
-            if (response.IsSuccessStatusCode)
-            {
-                retVal = (await response.Content.ReadAsAsync<int>());
-            }
-
-            return await Task.FromResult(retVal);
+            return await _httpService.DeleteAsAsync<int>(PaymentHistoryEndPoint, string.Format("PaymentHistoryID={0}", PaymentHistoryID));
         }
 
         /// <summary>
@@ -64,15 +70,7 @@ namespace Coopers.BusinessLayer.Database.APIClient
         /// <returns>PaymentHistory Model</returns>
         public async Task<PaymentHistory> GetPaymentHistoryByID(long PaymentHistoryID)
         {
-            HttpResponseMessage response = await new HttpClient().GetAsync(PaymentHistoryEndPoint + PaymentHistoryID);
-            if (response.IsSuccessStatusCode)
-            {
-                return (await response.Content.ReadAsAsync<PaymentHistory>());
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            return await _httpService.GetAsAsync<PaymentHistory>(PaymentHistoryEndPoint + PaymentHistoryID,"");
         }
 
         /// <summary>
@@ -82,20 +80,12 @@ namespace Coopers.BusinessLayer.Database.APIClient
         /// <returns>List of payment histories</returns>
         public async Task<List<PaymentHistory>> GetPaymentHistoryList(long AccountID)
         {
-            var QueryParam = string.Format("?AccountID={0}", AccountID);
-            HttpResponseMessage response = await new HttpClient().GetAsync(PaymentHistoryEndPoint + "List" + QueryParam);
-            if (response.IsSuccessStatusCode)
-            {
-                return (await response.Content.ReadAsAsync< List<PaymentHistory>>());
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            return await _httpService.GetAsAsync<List<PaymentHistory>>(PaymentHistoryEndPoint + "List", string.Format("AccountID={0}", AccountID));
         }
 
 
         #endregion
+
 
     }
 
