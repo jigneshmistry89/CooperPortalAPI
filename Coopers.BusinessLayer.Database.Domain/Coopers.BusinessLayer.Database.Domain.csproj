@@ -97,15 +97,15 @@
     <Compile Include="Migrations\201803181720209_Added AccountLocationTable.Designer.cs">
       <DependentUpon>201803181720209_Added AccountLocationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803220514505_Removed Location-User-LocationNetwork-Account Table.cs" />
+    <Compile Include="Migrations\201803220514505_Removed Location-User-LocationNetwork-Account Table.Designer.cs">
+      <DependentUpon>201803220514505_Removed Location-User-LocationNetwork-Account Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\AccountLocation.cs" />
     <Compile Include="Models\NetworkLocation.cs" />
-    <Compile Include="Models\LocationNetwork.cs" />
     <Compile Include="Models\TaxableStates.cs" />
     <Compile Include="Models\PaymentHistory.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803181720209_Added AccountLocationTable.resx">
       <DependentUpon>201803181720209_Added AccountLocationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803220514505_Removed Location-User-LocationNetwork-Account Table.resx">
+      <DependentUpon>201803220514505_Removed Location-User-LocationNetwork-Account Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

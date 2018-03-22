@@ -13,19 +13,11 @@
             new MigrateDatabaseToLatestVersion<CooperAtkinEntities, Configuration>("CooperAtkinEntities"));
         }
 
-        public virtual DbSet<Location> Locations { get; set; }
-
         public virtual DbSet<TaxableStates> TaxableStates { get; set; }
 
         public virtual DbSet<AccountLocation> AccountLocation { get; set; }
 
         public virtual DbSet<NetworkLocation> NetworkLocation { get; set; }
-
-        public virtual DbSet<User> Users { get; set; }
-
-        public virtual DbSet<LocationNetwork> LocationNetworks { get; set; }
-
-        public virtual DbSet<Account> Accounts { get; set; }
 
         public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
 
