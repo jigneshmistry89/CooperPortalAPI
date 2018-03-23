@@ -122,6 +122,12 @@ namespace Coopers.BusinessLayer.Model.DTO
 
         public string SensorCode { get; set; }
 
+        public long MinimumThreshold { get; set; }
+
+        public long MaximumThreshold { get; set; }
+
+        public long HeartBeat { get; set; }
+
     }
 
     public class UpdateSensorNote

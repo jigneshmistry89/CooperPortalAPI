@@ -42,4 +42,27 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient.DTO
         public long MaximumThreshold { get; set; }
 
     }
+
+    public class SensorCreate
+    {
+        public long SensorID { get; set; }
+
+        public long NetworkID { get; set; }
+
+        public long AccountID { get; set; }
+
+        public int MonnitApplicationID { get; set; }
+
+        public string Name { get; set; }
+
+        public string SensorCode { get; set; }
+
+        public long MinimumThreshold { get; set; }
+
+        public long MaximumThreshold { get; set; }
+
+        public long ReportInterval { get; set; }
+
+        public long ActiveStateInterval { get; set; }
+    }
 }

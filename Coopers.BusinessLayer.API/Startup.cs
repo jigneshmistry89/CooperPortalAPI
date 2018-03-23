@@ -100,6 +100,9 @@ namespace Coopers.BusinessLayer.API
                                 .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.NetworkID))
                                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.NetworkName));
                     x.CreateMap<CreateNetwork, NetworkLocation>().ReverseMap();
+                    x.CreateMap<SensorCreate, Model.DTO.CreateSensor>().ReverseMap()
+                                .ForMember(dest => dest.ReportInterval, opt => opt.MapFrom(src => src.HeartBeat))
+                                .ForMember(dest => dest.ActiveStateInterval, opt => opt.MapFrom(src => src.HeartBeat));
                     x.CreateMap<NetworkLocation,UpdateNetwork>().ReverseMap()
                                 .ForMember(dest => dest.CSNetID, opt => opt.MapFrom(src => src.NetworkID));
                     x.CreateMap<Model.DTO.Network, UpdateNetwork>().ReverseMap()

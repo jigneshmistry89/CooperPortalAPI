@@ -135,7 +135,8 @@ namespace Coopers.BusinessLayer.Services.Services
         public async Task<string> CreateSensor(Model.DTO.CreateSensor Sensor)
         {
             Sensor.SensorCode = CheckDigitGenerator.GenerateSecurityCode(Sensor.SensorID.ToString());
-            return await _sensorClient.CreateSensor(Sensor);
+            var sensor = _mapper.Map<SensorCreate>(Sensor);
+            return await _sensorClient.CreateSensor(sensor);
         }
 
         /// <summary>

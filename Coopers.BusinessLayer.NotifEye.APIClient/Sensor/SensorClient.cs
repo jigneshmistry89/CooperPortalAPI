@@ -254,7 +254,7 @@ namespace Coopers.BusinessLayer.NotifEye.APIClient
         /// </summary>
         /// <param name="CreateSensor">Create sensor model</param>
         /// <returns>Success/Failure</returns>
-        public async Task<string> CreateSensor(Model.DTO.CreateSensor Sensor)
+        public async Task<string> CreateSensor(SensorCreate Sensor)
         {
             var res = await _httpService.PostAsAsync<string>("sensor/CreateSensor", Sensor, false);
 
